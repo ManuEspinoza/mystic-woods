@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cn51vs8svm3vr"]
+[gd_scene load_steps=10 format=3 uid="uid://cn51vs8svm3vr"]
 
 [ext_resource type="PackedScene" uid="uid://c725msho6hywr" path="res://Scenes/character.tscn" id="1_38gl6"]
 [ext_resource type="Texture2D" uid="uid://co28t0dhsungp" path="res://Assets/tilesets/floors/flooring.png" id="1_gcpcb"]
 [ext_resource type="Texture2D" uid="uid://tbfx3uilnkp3" path="res://Assets/tilesets/grass.png" id="2_nuvfw"]
 [ext_resource type="Texture2D" uid="uid://4hemha48sxav" path="res://Assets/tilesets/plains.png" id="3_lmgh4"]
+[ext_resource type="PackedScene" uid="uid://jyxt1drt7s3c" path="res://Scenes/slime.tscn" id="5_xlpkw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ev0fp"]
 texture = ExtResource("1_gcpcb")
@@ -115,3 +116,9 @@ layer_0/tile_data = PackedInt32Array(-131080, 131074, 1, -65544, 131074, 1, -8, 
 
 [node name="Camera2D" type="Camera2D" parent="Character"]
 zoom = Vector2(3, 3)
+
+[node name="Slime" parent="." instance=ExtResource("5_xlpkw")]
+position = Vector2(-73, -4)
+
+[node name="Slime2" parent="." instance=ExtResource("5_xlpkw")]
+position = Vector2(-69, -32)
