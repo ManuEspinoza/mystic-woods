@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cn51vs8svm3vr"]
+
+[ext_resource type="PackedScene" uid="uid://c725msho6hywr" path="res://Scenes/character.tscn" id="1_38gl6"]
+
+[node name="Game" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+format = 2
+
+[node name="Character" parent="." instance=ExtResource("1_38gl6")]
