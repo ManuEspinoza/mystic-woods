@@ -322,10 +322,22 @@ remote_path = NodePath("../../Camera2D")
 [node name="Enemies" type="Node" parent="."]
 
 [node name="Slime" parent="Enemies" instance=ExtResource("5_xlpkw")]
-position = Vector2(-73, -4)
+position = Vector2(-17, 268)
+
+[node name="Slime5" parent="Enemies" instance=ExtResource("5_xlpkw")]
+position = Vector2(222, 270)
+
+[node name="Slime6" parent="Enemies" instance=ExtResource("5_xlpkw")]
+position = Vector2(-100, -392)
+
+[node name="Slime3" parent="Enemies" instance=ExtResource("5_xlpkw")]
+position = Vector2(-227, 144)
+
+[node name="Slime4" parent="Enemies" instance=ExtResource("5_xlpkw")]
+position = Vector2(329, -98)
 
 [node name="Slime2" parent="Enemies" instance=ExtResource("5_xlpkw")]
-position = Vector2(-69, -32)
+position = Vector2(-295, -131)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
