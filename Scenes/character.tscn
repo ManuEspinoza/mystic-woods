@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://c725msho6hywr"]
+[gd_scene load_steps=55 format=3 uid="uid://c725msho6hywr"]
 
 [ext_resource type="Script" path="res://Scripts/character.gd" id="1_6fc5m"]
 [ext_resource type="Texture2D" uid="uid://dfmw83pgthvml" path="res://Assets/characters/player.png" id="1_tuq37"]
@@ -397,6 +397,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eii65"]
 size = Vector2(7, 15)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ac0a"]
+size = Vector2(11, 22)
+
 [node name="Character" type="CharacterBody2D"]
 script = ExtResource("1_6fc5m")
 
@@ -404,11 +407,46 @@ script = ExtResource("1_6fc5m")
 sprite_frames = SubResource("SpriteFrames_0m1j0")
 animation = &"attack_side"
 autoplay = "idle"
-frame = 3
-frame_progress = 1.0
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 8.5)
 shape = SubResource("RectangleShape2D_eii65")
+
+[node name="AttackAreaRight" type="Area2D" parent="."]
+position = Vector2(-1, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackAreaRight"]
+position = Vector2(13.5, 11)
+rotation = -6.28319
+shape = SubResource("RectangleShape2D_8ac0a")
+disabled = true
+
+[node name="AttackAreaLeft" type="Area2D" parent="."]
+position = Vector2(-1, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackAreaLeft"]
+position = Vector2(13.5, 11)
+rotation = -6.28319
+shape = SubResource("RectangleShape2D_8ac0a")
+disabled = true
+
+[node name="AttackAreaRight3" type="Area2D" parent="."]
+position = Vector2(-1, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackAreaRight3"]
+position = Vector2(13.5, 11)
+rotation = -6.28319
+shape = SubResource("RectangleShape2D_8ac0a")
+disabled = true
+
+[node name="AttackAreaRight4" type="Area2D" parent="."]
+position = Vector2(-1, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackAreaRight4"]
+position = Vector2(13.5, 11)
+rotation = -6.28319
+shape = SubResource("RectangleShape2D_8ac0a")
+disabled = true
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
