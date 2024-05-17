@@ -57,20 +57,27 @@ func player_movement():
 func attack():
 	if Input.is_action_just_pressed("attack"):
 		is_attacking = true
-		$AttackArea/CollisionShape2D.disabled = false
+		
 		if direction == DOWN:
+			$AttackAreaDown/CollisionShape2D.disabled = false
 			animated_sprite.play("attack_down")
 		elif direction == UP:
+			$AttackAreaUp/CollisionShape2D.disabled = false
 			animated_sprite.play("attack_up")
 		elif direction == RIGHT:
+			$AttackAreaRight/CollisionShape2D.disabled = false
 			animated_sprite.flip_h = false
 			animated_sprite.play("attack_side")
 		elif direction == LEFT:
+			$AttackAreaLeft/CollisionShape2D.disabled = false
 			animated_sprite.flip_h = true
 			animated_sprite.play("attack_side")
 			
 func _on_animated_sprite_2d_animation_finished():
 	if animated_sprite.animation == "attack_down" or animated_sprite.animation == "attack_up" or animated_sprite.animation == "attack_side":
 		is_attacking = false
-		$AttackArea/CollisionShape2D.disabled = true
+		$AttackAreaRight/CollisionShape2D.disabled = true
+		$AttackAreaLeft/CollisionShape2D.disabled = true
+		$AttackAreaUp/CollisionShape2D.disabled = true
+		$AttackAreaDown/CollisionShape2D.disabled = true
 		

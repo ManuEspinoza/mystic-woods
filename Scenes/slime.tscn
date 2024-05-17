@@ -1,7 +1,27 @@
-[gd_scene load_steps=15 format=3 uid="uid://jyxt1drt7s3c"]
+[gd_scene load_steps=20 format=3 uid="uid://jyxt1drt7s3c"]
 
 [ext_resource type="Texture2D" uid="uid://dbx3nmu76cdn3" path="res://Assets/characters/slime.png" id="1_ecnxh"]
 [ext_resource type="Script" path="res://Scripts/slime.gd" id="1_js3og"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lyw6v"]
+atlas = ExtResource("1_ecnxh")
+region = Rect2(0, 384, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6y4e0"]
+atlas = ExtResource("1_ecnxh")
+region = Rect2(32, 384, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_abl14"]
+atlas = ExtResource("1_ecnxh")
+region = Rect2(64, 384, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jbfx6"]
+atlas = ExtResource("1_ecnxh")
+region = Rect2(96, 384, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3mjgu"]
+atlas = ExtResource("1_ecnxh")
+region = Rect2(128, 384, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d3q0d"]
 atlas = ExtResource("1_ecnxh")
@@ -45,6 +65,26 @@ region = Rect2(160, 96, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kaoax"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lyw6v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6y4e0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_abl14")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jbfx6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3mjgu")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_d3q0d")
@@ -94,10 +134,8 @@ script = ExtResource("1_js3og")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_kaoax")
-animation = &"move"
+animation = &"dead"
 autoplay = "move"
-frame = 2
-frame_progress = 0.557928
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)

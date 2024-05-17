@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://c725msho6hywr"]
+[gd_scene load_steps=58 format=3 uid="uid://c725msho6hywr"]
 
 [ext_resource type="Script" path="res://Scripts/character.gd" id="1_6fc5m"]
 [ext_resource type="Texture2D" uid="uid://dfmw83pgthvml" path="res://Assets/characters/player.png" id="1_tuq37"]
@@ -400,20 +400,30 @@ size = Vector2(7, 15)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8ac0a"]
 size = Vector2(11, 22)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3bf72"]
+size = Vector2(11, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cx0ic"]
+size = Vector2(22, 8.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_usycd"]
+size = Vector2(22, 8.5)
+
 [node name="Character" type="CharacterBody2D"]
 script = ExtResource("1_6fc5m")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0m1j0")
-animation = &"attack_side"
+animation = &"attack_down"
 autoplay = "idle"
 frame = 1
+flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 8.5)
 shape = SubResource("RectangleShape2D_eii65")
 
-[node name="AttackAreaRight" type="Area2D" parent="."]
+[node name="AttackAreaRight" type="Area2D" parent="." groups=["Sword"]]
 position = Vector2(-1, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackAreaRight"]
@@ -422,31 +432,25 @@ rotation = -6.28319
 shape = SubResource("RectangleShape2D_8ac0a")
 disabled = true
 
-[node name="AttackAreaLeft" type="Area2D" parent="."]
-position = Vector2(-1, 0)
+[node name="AttackAreaLeft" type="Area2D" parent="." groups=["Sword"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackAreaLeft"]
-position = Vector2(13.5, 11)
-rotation = -6.28319
-shape = SubResource("RectangleShape2D_8ac0a")
+position = Vector2(-12.5, 11)
+shape = SubResource("RectangleShape2D_3bf72")
 disabled = true
 
-[node name="AttackAreaRight3" type="Area2D" parent="."]
-position = Vector2(-1, 0)
+[node name="AttackAreaUp" type="Area2D" parent="." groups=["Sword"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackAreaRight3"]
-position = Vector2(13.5, 11)
-rotation = -6.28319
-shape = SubResource("RectangleShape2D_8ac0a")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackAreaUp"]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_cx0ic")
 disabled = true
 
-[node name="AttackAreaRight4" type="Area2D" parent="."]
-position = Vector2(-1, 0)
+[node name="AttackAreaDown" type="Area2D" parent="." groups=["Sword"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackAreaRight4"]
-position = Vector2(13.5, 11)
-rotation = -6.28319
-shape = SubResource("RectangleShape2D_8ac0a")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackAreaDown"]
+position = Vector2(-1, 20)
+shape = SubResource("RectangleShape2D_usycd")
 disabled = true
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
