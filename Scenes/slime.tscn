@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://jyxt1drt7s3c"]
+[gd_scene load_steps=21 format=3 uid="uid://jyxt1drt7s3c"]
 
 [ext_resource type="Texture2D" uid="uid://dbx3nmu76cdn3" path="res://Assets/characters/slime.png" id="1_ecnxh"]
 [ext_resource type="Script" path="res://Scripts/slime.gd" id="1_js3og"]
@@ -129,14 +129,25 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_p53gj"]
 radius = 6.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_un7p5"]
+radius = 7.07107
+
 [node name="Slime" type="CharacterBody2D"]
 script = ExtResource("1_js3og")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_kaoax")
-animation = &"dead"
+animation = &"idle"
 autoplay = "move"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_p53gj")
+
+[node name="HurtingArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtingArea2D"]
+shape = SubResource("CircleShape2D_un7p5")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="area_entered" from="HurtingArea2D" to="." method="_on_hurting_area_2d_area_entered"]
