@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://c725msho6hywr"]
+[gd_scene load_steps=61 format=3 uid="uid://c725msho6hywr"]
 
 [ext_resource type="Script" path="res://Scripts/character.gd" id="1_6fc5m"]
 [ext_resource type="Texture2D" uid="uid://dfmw83pgthvml" path="res://Assets/characters/player.png" id="1_tuq37"]
@@ -50,6 +50,18 @@ region = Rect2(96, 384, 48, 48)
 [sub_resource type="AtlasTexture" id="AtlasTexture_xyy06"]
 atlas = ExtResource("1_tuq37")
 region = Rect2(144, 384, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kv0qu"]
+atlas = ExtResource("1_tuq37")
+region = Rect2(0, 480, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gonqr"]
+atlas = ExtResource("1_tuq37")
+region = Rect2(48, 480, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_elavs"]
+atlas = ExtResource("1_tuq37")
+region = Rect2(96, 480, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l04l4"]
 atlas = ExtResource("1_tuq37")
@@ -254,6 +266,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_kv0qu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gonqr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_elavs")
+}],
+"loop": false,
+"name": &"gun",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_l04l4")
 }, {
 "duration": 1.0,
@@ -414,9 +440,10 @@ script = ExtResource("1_6fc5m")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0m1j0")
-animation = &"attack_down"
+animation = &"gun"
 autoplay = "idle"
-frame = 1
+frame = 2
+frame_progress = 0.760867
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
