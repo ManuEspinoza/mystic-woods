@@ -208,6 +208,8 @@ blend_point_2/node = SubResource("AnimationNodeAnimation_ammyg")
 blend_point_2/pos = Vector2(1, 0)
 blend_point_3/node = SubResource("AnimationNodeAnimation_m5y30")
 blend_point_3/pos = Vector2(0, -0.9)
+min_space = Vector2(-1, -1.1)
+max_space = Vector2(1, 1.1)
 blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pnqk1"]
@@ -231,6 +233,8 @@ blend_point_2/node = SubResource("AnimationNodeAnimation_wo336")
 blend_point_2/pos = Vector2(-1, 0)
 blend_point_3/node = SubResource("AnimationNodeAnimation_he6w4")
 blend_point_3/pos = Vector2(0, 1.1)
+min_space = Vector2(-1, -1.1)
+max_space = Vector2(1, 1.1)
 snap = Vector2(0.2, 0.2)
 blend_mode = 1
 sync = true
@@ -256,6 +260,8 @@ blend_point_2/node = SubResource("AnimationNodeAnimation_w5lqo")
 blend_point_2/pos = Vector2(-1, 0)
 blend_point_3/node = SubResource("AnimationNodeAnimation_ty7l4")
 blend_point_3/pos = Vector2(0, -0.9)
+min_space = Vector2(-1, -1.1)
+max_space = Vector2(1, 1.1)
 blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j540o"]
@@ -312,13 +318,12 @@ root_node = NodePath("../CollisionShape2D")
 libraries = {
 "": SubResource("AnimationLibrary_t0eo8")
 }
-autoplay = "idle"
 
 [node name="Body" type="Sprite2D" parent="."]
 texture = ExtResource("1_3wi3f")
 hframes = 6
 vframes = 10
-frame = 9
+frame = 6
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../CollisionShape2D")

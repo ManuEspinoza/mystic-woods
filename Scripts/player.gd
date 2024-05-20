@@ -8,7 +8,9 @@ const RIGHT = "right"
 const UP = "up"
 const DOWN = "down"
 
+@onready var body = $Body
 @onready var animation_tree = $AnimationTree
+
 var input_direction = Vector2.ZERO
 
 func _physics_process(delta):
@@ -20,9 +22,14 @@ func _physics_process(delta):
 	else:
 		animation_tree["parameters/conditions/idle"] = false
 		animation_tree["parameters/conditions/is_walking"] = true
+		flip_sprite()
 		update_blend_position()
+		
 	velocity = input_direction * SPEED
 	move_and_slide()
+
+func flip_sprite():
+	body.flip_h = input_direction.x < 0
 
 func update_blend_position():
 	animation_tree["parameters/idle/blend_position"] = input_direction
