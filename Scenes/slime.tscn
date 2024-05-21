@@ -1,7 +1,27 @@
-[gd_scene load_steps=15 format=3 uid="uid://jyxt1drt7s3c"]
+[gd_scene load_steps=20 format=3 uid="uid://jyxt1drt7s3c"]
 
 [ext_resource type="Texture2D" uid="uid://dbx3nmu76cdn3" path="res://Assets/characters/slime.png" id="1_ecnxh"]
 [ext_resource type="Script" path="res://Scripts/slime.gd" id="1_js3og"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xrnqu"]
+atlas = ExtResource("1_ecnxh")
+region = Rect2(0, 384, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_drnln"]
+atlas = ExtResource("1_ecnxh")
+region = Rect2(32, 384, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ckgb3"]
+atlas = ExtResource("1_ecnxh")
+region = Rect2(64, 384, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tju0k"]
+atlas = ExtResource("1_ecnxh")
+region = Rect2(96, 384, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46y41"]
+atlas = ExtResource("1_ecnxh")
+region = Rect2(128, 384, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d3q0d"]
 atlas = ExtResource("1_ecnxh")
@@ -45,6 +65,26 @@ region = Rect2(160, 96, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kaoax"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xrnqu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_drnln")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ckgb3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tju0k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_46y41")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_d3q0d")
@@ -94,10 +134,10 @@ script = ExtResource("1_js3og")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_kaoax")
-animation = &"move"
+animation = &"dead"
 autoplay = "move"
-frame = 2
-frame_progress = 0.557928
+frame = 3
+frame_progress = 0.72075
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
