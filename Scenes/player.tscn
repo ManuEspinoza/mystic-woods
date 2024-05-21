@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://d3ui3w8vghkdh"]
+[gd_scene load_steps=43 format=3 uid="uid://j4q8rwyjujmv"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_0qppv"]
 [ext_resource type="Texture2D" uid="uid://dfmw83pgthvml" path="res://Assets/characters/player.png" id="1_3wi3f"]
@@ -6,6 +6,9 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hewva"]
 radius = 5.0
 height = 18.0
+
+[sub_resource type="Animation" id="Animation_yma2e"]
+length = 0.001
 
 [sub_resource type="Animation" id="Animation_i3pyn"]
 resource_name = "attack_down"
@@ -21,6 +24,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [36, 37, 38, 39]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../AttackDownCollition:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_c26x1"]
@@ -38,6 +53,30 @@ tracks/0/keys = {
 "update": 1,
 "values": [42, 43, 44, 45]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../AttackRightCollition:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../AttackLeftCollition:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="Animation" id="Animation_kk8nw"]
 resource_name = "attack_up"
@@ -53,6 +92,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [48, 49, 50, 51]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../AttackUpCollition:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_72gqa"]
@@ -175,6 +226,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t0eo8"]
 _data = {
+"RESET": SubResource("Animation_yma2e"),
 "attack_down": SubResource("Animation_i3pyn"),
 "attack_side": SubResource("Animation_c26x1"),
 "attack_up": SubResource("Animation_kk8nw"),
@@ -306,6 +358,18 @@ states/walk/position = Vector2(454.667, 101.21)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_j540o"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_x2e5y"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_t4goa"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_7ed5k"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_1ifnt"), "walk", "attack", SubResource("AnimationNodeStateMachineTransition_ju834"), "attack", "walk", SubResource("AnimationNodeStateMachineTransition_yvgkd")]
 graph_offset = Vector2(0, -70.0931)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yms3f"]
+size = Vector2(20, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dbstn"]
+size = Vector2(20, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tp3ys"]
+size = Vector2(11, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ce4kf"]
+size = Vector2(11, 20)
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_0qppv")
 
@@ -323,7 +387,7 @@ libraries = {
 texture = ExtResource("1_3wi3f")
 hframes = 6
 vframes = 10
-frame = 6
+frame = 8
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../CollisionShape2D")
@@ -332,6 +396,26 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/idle = false
 parameters/conditions/is_attacking = false
 parameters/conditions/is_walking = false
-parameters/attack/blend_position = Vector2(0, 0)
+parameters/attack/blend_position = Vector2(-0.40717, 0.408571)
 parameters/idle/blend_position = Vector2(0, 0)
 parameters/walk/blend_position = Vector2(0, 0)
+
+[node name="AttackUpCollition" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -4)
+shape = SubResource("RectangleShape2D_yms3f")
+disabled = true
+
+[node name="AttackDownCollition" type="CollisionShape2D" parent="."]
+position = Vector2(1, 21.5)
+shape = SubResource("RectangleShape2D_dbstn")
+disabled = true
+
+[node name="AttackRightCollition" type="CollisionShape2D" parent="."]
+position = Vector2(13.5, 12)
+shape = SubResource("RectangleShape2D_tp3ys")
+disabled = true
+
+[node name="AttackLeftCollition" type="CollisionShape2D" parent="."]
+position = Vector2(-13, 10)
+shape = SubResource("RectangleShape2D_ce4kf")
+disabled = true

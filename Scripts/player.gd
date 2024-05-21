@@ -12,6 +12,7 @@ const DOWN = "down"
 @onready var animation_tree = $AnimationTree
 
 var input_direction = Vector2.ZERO
+var facing_right = true
 
 func _physics_process(delta):
 	input_direction = Input.get_vector(LEFT, RIGHT, UP, DOWN)
@@ -22,14 +23,17 @@ func _physics_process(delta):
 	else:
 		animation_tree["parameters/conditions/idle"] = false
 		animation_tree["parameters/conditions/is_walking"] = true
-		flip_sprite()
+		change_facing_direction()
 		update_blend_position()
 		
+	animation_tree["parameters/conditions/is_attacking"] = Input.is_action_just_pressed("attack")
+
 	velocity = input_direction * SPEED
 	move_and_slide()
 
-func flip_sprite():
+func change_facing_direction():
 	body.flip_h = input_direction.x < 0
+	#facing_right = !body.flip_h
 
 func update_blend_position():
 	animation_tree["parameters/idle/blend_position"] = input_direction
