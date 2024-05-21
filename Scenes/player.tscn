@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://j4q8rwyjujmv"]
+[gd_scene load_steps=43 format=3 uid="uid://daf2t12qf6iuu"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_0qppv"]
 [ext_resource type="Texture2D" uid="uid://dfmw83pgthvml" path="res://Assets/characters/player.png" id="1_3wi3f"]
@@ -387,7 +387,7 @@ libraries = {
 texture = ExtResource("1_3wi3f")
 hframes = 6
 vframes = 10
-frame = 8
+frame = 11
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../CollisionShape2D")
@@ -400,22 +400,22 @@ parameters/attack/blend_position = Vector2(-0.40717, 0.408571)
 parameters/idle/blend_position = Vector2(0, 0)
 parameters/walk/blend_position = Vector2(0, 0)
 
-[node name="AttackUpCollition" type="CollisionShape2D" parent="."]
+[node name="AttackUpCollition" type="CollisionShape2D" parent="." groups=["Sword"]]
 position = Vector2(-1, -4)
 shape = SubResource("RectangleShape2D_yms3f")
 disabled = true
 
-[node name="AttackDownCollition" type="CollisionShape2D" parent="."]
+[node name="AttackDownCollition" type="CollisionShape2D" parent="." groups=["Sword"]]
 position = Vector2(1, 21.5)
 shape = SubResource("RectangleShape2D_dbstn")
 disabled = true
 
-[node name="AttackRightCollition" type="CollisionShape2D" parent="."]
+[node name="AttackRightCollition" type="CollisionShape2D" parent="." groups=["Sword"]]
 position = Vector2(13.5, 12)
 shape = SubResource("RectangleShape2D_tp3ys")
 disabled = true
 
-[node name="AttackLeftCollition" type="CollisionShape2D" parent="."]
+[node name="AttackLeftCollition" type="CollisionShape2D" parent="." groups=["Sword"]]
 position = Vector2(-13, 10)
 shape = SubResource("RectangleShape2D_ce4kf")
 disabled = true
