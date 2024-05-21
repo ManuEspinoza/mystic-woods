@@ -31,13 +31,12 @@ func move_state(delta):
 	if input_direction == Vector2.ZERO:
 		animation_tree["parameters/conditions/idle"] = true
 		animation_tree["parameters/conditions/is_walking"] = false
-		animation_tree["parameters/conditions/is_attacking"] = false
-		animation_tree["parameters/idle/blend_position"] = input_direction
 	else:
 		animation_tree["parameters/conditions/idle"] = false
 		animation_tree["parameters/conditions/is_walking"] = true
-		animation_tree["parameters/conditions/is_attacking"] = false
+		animation_tree["parameters/idle/blend_position"] = input_direction
 		animation_tree["parameters/walk/blend_position"] = input_direction
+		
 	#update_blend_position()	
 	velocity = input_direction * SPEED
 	if Input.is_action_just_pressed("attack"):
@@ -48,3 +47,7 @@ func attack_state():
 		animation_tree["parameters/conditions/is_attacking"] = true
 		animation_tree["parameters/attack/blend_position"] = input_direction
 		state = WALK
+
+func set_walk():
+	animation_tree["parameters/conditions/is_attacking"] = false
+	state = WALK
