@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://daf2t12qf6iuu"]
+[gd_scene load_steps=43 format=3 uid="uid://7audpf70ehds"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_0qppv"]
 [ext_resource type="Texture2D" uid="uid://dfmw83pgthvml" path="res://Assets/characters/player.png" id="1_3wi3f"]
@@ -28,7 +28,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../AttackDownCollition:disabled")
+tracks/1/path = NodePath("../AttackDown/AttackDownCollition:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -56,7 +56,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../AttackRightCollition:disabled")
+tracks/1/path = NodePath("../AttackRight/AttackRightCollition:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -68,7 +68,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../AttackLeftCollition:disabled")
+tracks/2/path = NodePath("../AttackLeft/AttackLeftCollition:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -96,7 +96,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../AttackUpCollition:disabled")
+tracks/1/path = NodePath("../AttackUp/AttackUpCollition:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -387,7 +387,7 @@ libraries = {
 texture = ExtResource("1_3wi3f")
 hframes = 6
 vframes = 10
-frame = 11
+frame = 7
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../CollisionShape2D")
@@ -400,22 +400,30 @@ parameters/attack/blend_position = Vector2(-0.40717, 0.408571)
 parameters/idle/blend_position = Vector2(0, 0)
 parameters/walk/blend_position = Vector2(0, 0)
 
-[node name="AttackUpCollition" type="CollisionShape2D" parent="." groups=["Sword"]]
+[node name="AttackUp" type="Area2D" parent="." groups=["Sword"]]
+
+[node name="AttackUpCollition" type="CollisionShape2D" parent="AttackUp"]
 position = Vector2(-1, -4)
 shape = SubResource("RectangleShape2D_yms3f")
 disabled = true
 
-[node name="AttackDownCollition" type="CollisionShape2D" parent="." groups=["Sword"]]
+[node name="AttackDown" type="Area2D" parent="." groups=["Sword"]]
+
+[node name="AttackDownCollition" type="CollisionShape2D" parent="AttackDown"]
 position = Vector2(1, 21.5)
 shape = SubResource("RectangleShape2D_dbstn")
 disabled = true
 
-[node name="AttackRightCollition" type="CollisionShape2D" parent="." groups=["Sword"]]
+[node name="AttackRight" type="Area2D" parent="." groups=["Sword"]]
+
+[node name="AttackRightCollition" type="CollisionShape2D" parent="AttackRight"]
 position = Vector2(13.5, 12)
 shape = SubResource("RectangleShape2D_tp3ys")
 disabled = true
 
-[node name="AttackLeftCollition" type="CollisionShape2D" parent="." groups=["Sword"]]
+[node name="AttackLeft" type="Area2D" parent="." groups=["Sword"]]
+
+[node name="AttackLeftCollition" type="CollisionShape2D" parent="AttackLeft"]
 position = Vector2(-13, 10)
 shape = SubResource("RectangleShape2D_ce4kf")
 disabled = true

@@ -12,7 +12,6 @@ const DOWN = "down"
 @onready var animation_tree = $AnimationTree
 
 var input_direction = Vector2.ZERO
-var facing_right = true
 
 func _physics_process(delta):
 	input_direction = Input.get_vector(LEFT, RIGHT, UP, DOWN)
@@ -33,7 +32,6 @@ func _physics_process(delta):
 
 func change_facing_direction():
 	body.flip_h = input_direction.x < 0
-	#facing_right = !body.flip_h
 
 func update_blend_position():
 	animation_tree["parameters/idle/blend_position"] = input_direction

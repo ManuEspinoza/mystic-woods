@@ -15,7 +15,7 @@ func _on_animated_sprite_2d_animation_finished():
 	if animated_sprite.animation == "dead":
 		queue_free()
 
-func _on_hurting_area_2d_area_entered(area):
+func _on_damage_area_area_entered(area):
 	if area.is_in_group("Sword"):
 		dead = true
 		animated_sprite.play("dead")
