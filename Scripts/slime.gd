@@ -8,8 +8,8 @@ var dead = false
 func _physics_process(delta):
 	if dead == false:
 		animated_sprite.play("move")
-	target_position = (player.position - position).normalized()
-	move_and_collide(target_position * 2)
+		target_position = (player.position - position).normalized()
+		move_and_collide(target_position * 2)
 
 func _on_animated_sprite_2d_animation_finished():
 	if animated_sprite.animation == "dead":
