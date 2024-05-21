@@ -28,7 +28,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../AttackDown/AttackDownCollition:disabled")
+tracks/1/path = NodePath("../Sword/AttackDown/AttackDownCollition:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -56,7 +56,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../AttackUp/AttackUpCollition:disabled")
+tracks/1/path = NodePath("../Sword/AttackUp/AttackUpCollition:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -168,7 +168,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../AttackRight/AttackRightCollition:disabled")
+tracks/1/path = NodePath("../Sword/AttackRight/AttackRightCollition:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -247,7 +247,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../AttackLeft/AttackLeftCollition:disabled")
+tracks/1/path = NodePath("../Sword/AttackLeft/AttackLeftCollition:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -440,7 +440,7 @@ libraries = {
 texture = ExtResource("1_3wi3f")
 hframes = 6
 vframes = 13
-frame = 17
+frame = 16
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../CollisionShape2D")
@@ -453,30 +453,32 @@ parameters/attack/blend_position = Vector2(0, -0.230383)
 parameters/idle/blend_position = Vector2(-0.00256079, -0.113569)
 parameters/walk/blend_position = Vector2(0.00128043, -0.0551623)
 
-[node name="AttackUp" type="Area2D" parent="." groups=["Sword"]]
+[node name="Sword" type="Node2D" parent="."]
 
-[node name="AttackUpCollition" type="CollisionShape2D" parent="AttackUp"]
+[node name="AttackUp" type="Area2D" parent="Sword" groups=["Sword"]]
+
+[node name="AttackUpCollition" type="CollisionShape2D" parent="Sword/AttackUp"]
 position = Vector2(-1, -4)
 shape = SubResource("RectangleShape2D_yms3f")
 disabled = true
 
-[node name="AttackDown" type="Area2D" parent="." groups=["Sword"]]
+[node name="AttackDown" type="Area2D" parent="Sword" groups=["Sword"]]
 
-[node name="AttackDownCollition" type="CollisionShape2D" parent="AttackDown"]
+[node name="AttackDownCollition" type="CollisionShape2D" parent="Sword/AttackDown"]
 position = Vector2(1, 21.5)
 shape = SubResource("RectangleShape2D_dbstn")
 disabled = true
 
-[node name="AttackRight" type="Area2D" parent="." groups=["Sword"]]
+[node name="AttackRight" type="Area2D" parent="Sword" groups=["Sword"]]
 
-[node name="AttackRightCollition" type="CollisionShape2D" parent="AttackRight"]
+[node name="AttackRightCollition" type="CollisionShape2D" parent="Sword/AttackRight"]
 position = Vector2(13.5, 12)
 shape = SubResource("RectangleShape2D_tp3ys")
 disabled = true
 
-[node name="AttackLeft" type="Area2D" parent="." groups=["Sword"]]
+[node name="AttackLeft" type="Area2D" parent="Sword" groups=["Sword"]]
 
-[node name="AttackLeftCollition" type="CollisionShape2D" parent="AttackLeft"]
+[node name="AttackLeftCollition" type="CollisionShape2D" parent="Sword/AttackLeft"]
 position = Vector2(-13, 10)
 shape = SubResource("RectangleShape2D_ce4kf")
 disabled = true
