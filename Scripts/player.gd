@@ -17,6 +17,13 @@ enum {
 @onready var animation_tree = $AnimationTree
 var state = WALK
 var input_direction = Vector2.ZERO
+var attack_direction = Vector2.ZERO
+
+func _ready():
+	input_direction = Vector2(0, 1)
+	animation_tree["parameters/idle/blend_position"] = input_direction
+	animation_tree["parameters/walk/blend_position"] = input_direction
+	animation_tree["parameters/attack/blend_position"] = input_direction
 	
 func _physics_process(delta):
 	match state:
@@ -34,19 +41,18 @@ func move_state(delta):
 	else:
 		animation_tree["parameters/conditions/idle"] = false
 		animation_tree["parameters/conditions/is_walking"] = true
+		attack_direction = input_direction
 		animation_tree["parameters/idle/blend_position"] = input_direction
 		animation_tree["parameters/walk/blend_position"] = input_direction
-		
-	#update_blend_position()	
-	velocity = input_direction * SPEED
+			
 	if Input.is_action_just_pressed("attack"):
 		state = ATTACK
+	velocity = input_direction * SPEED
 	move_and_slide()
 	
 func attack_state():
-		animation_tree["parameters/conditions/is_attacking"] = true
-		animation_tree["parameters/attack/blend_position"] = input_direction
-		state = WALK
+	animation_tree["parameters/attack/blend_position"] = attack_direction
+	animation_tree["parameters/conditions/is_attacking"] = true
 
 func set_walk():
 	animation_tree["parameters/conditions/is_attacking"] = false
