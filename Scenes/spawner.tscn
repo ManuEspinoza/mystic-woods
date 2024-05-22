@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnjrssqgg7xam"]
+
+[ext_resource type="Script" path="res://Scripts/spawner.gd" id="1_uklym"]
+
+[node name="Spawner" type="Node2D"]
+script = ExtResource("1_uklym")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="SpawnArea" type="Marker2D" parent="."]
+position = Vector2(463, 317)
+
+[node name="SpawnArea2" type="Marker2D" parent="."]
+position = Vector2(-459, -315)
+
+[node name="SpawnArea3" type="Marker2D" parent="."]
+position = Vector2(-460, 315)
+
+[node name="SpawnArea4" type="Marker2D" parent="."]
+position = Vector2(422, -346)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
