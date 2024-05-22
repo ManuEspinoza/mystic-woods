@@ -1,7 +1,9 @@
 extends CharacterBody2D
+@onready var heathbar = $heathbar
+@onready var body = $Body
+@onready var animation_tree = $AnimationTree
 
 const SPEED = 200.0
-
 #Input actions
 const LEFT = "left"
 const RIGHT = "right"
@@ -13,14 +15,15 @@ enum {
 	ATTACK
 }
 
-@onready var body = $Body
-@onready var animation_tree = $AnimationTree
 var state = WALK
 var input_direction = Vector2.ZERO
 var attack_direction = Vector2.ZERO
+var health = 100
 
 func _ready():
 	input_direction = Vector2(0, 1)
+	heathbar.visible = false
+	heathbar.value = health
 	animation_tree["parameters/idle/blend_position"] = input_direction
 	animation_tree["parameters/walk/blend_position"] = input_direction
 	animation_tree["parameters/attack/blend_position"] = input_direction
@@ -57,3 +60,26 @@ func attack_state():
 func set_walk():
 	animation_tree["parameters/conditions/is_attacking"] = false
 	state = WALK
+
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name == "dead":
+		health = 0
+
+
+func _on_damage_area_body_entered(body):
+	if body.is_in_group("EnemyAttack"):
+		handle_enemy_damage(body)
+	
+func handle_enemy_damage(enemy):
+	var final_health = health
+	var enemy_damage = body.damage
+	final_health -= enemy_damage;
+	heathbar.value = final_health
+		
+	if final_health <= 0:
+		animation_tree["parameters/conditions/is_dead"] = true
+	else:
+		health = final_health
+		
+	if final_health < 100:
+		heathbar.visible = true

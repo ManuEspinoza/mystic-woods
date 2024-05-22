@@ -6,7 +6,7 @@
 script = ExtResource("1_uklym")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 2.0
 
 [node name="SpawnArea" type="Marker2D" parent="."]
 position = Vector2(463, 317)

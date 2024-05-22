@@ -4,6 +4,7 @@ extends CharacterBody2D
 var target_position
 const SPEED = 200.0
 var dead = false
+var damage = 10
 
 func _physics_process(delta):
 	if dead == false:

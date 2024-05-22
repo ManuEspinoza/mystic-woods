@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://cn51vs8svm3vr"]
+[gd_scene load_steps=11 format=3 uid="uid://cn51vs8svm3vr"]
 
+[ext_resource type="Script" path="res://Scripts/game.gd" id="1_ecb3v"]
 [ext_resource type="Texture2D" uid="uid://co28t0dhsungp" path="res://Assets/tilesets/floors/flooring.png" id="1_gcpcb"]
 [ext_resource type="Texture2D" uid="uid://tbfx3uilnkp3" path="res://Assets/tilesets/grass.png" id="2_nuvfw"]
 [ext_resource type="Texture2D" uid="uid://4hemha48sxav" path="res://Assets/tilesets/plains.png" id="3_lmgh4"]
@@ -305,6 +306,7 @@ sources/2 = SubResource("TileSetAtlasSource_jxyly")
 
 [node name="Game" type="Node2D"]
 position = Vector2(1, 0)
+script = ExtResource("1_ecb3v")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_81ups")
