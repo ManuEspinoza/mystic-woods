@@ -495,9 +495,9 @@ size = Vector2(11, 20)
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_0qppv")
 
-[node name="DamageArea" type="Area2D" parent="."]
+[node name="BodyArea" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BodyArea"]
 position = Vector2(0, 9)
 scale = Vector2(0.48, 1)
 shape = SubResource("CircleShape2D_hdn1i")
@@ -516,7 +516,7 @@ libraries = {
 texture = ExtResource("1_3wi3f")
 hframes = 6
 vframes = 13
-frame = 15
+frame = 16
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../CollisionShape2D")
@@ -569,5 +569,5 @@ offset_bottom = 34.0
 scale = Vector2(0.1, 0.1)
 show_percentage = false
 
-[connection signal="area_entered" from="DamageArea" to="." method="_on_damage_area_area_entered"]
-[connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]
+[connection signal="area_entered" from="BodyArea" to="." method="_on_body_area_area_entered"]
+[connection signal="body_entered" from="BodyArea" to="." method="_on_body_area_body_entered"]

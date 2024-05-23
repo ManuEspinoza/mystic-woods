@@ -1,5 +1,5 @@
 extends Node2D
-@onready var player = %Player
+
 @onready var timer = $Timer
 		
 func _on_player_health_depleted():
