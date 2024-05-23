@@ -516,7 +516,7 @@ libraries = {
 texture = ExtResource("1_3wi3f")
 hframes = 6
 vframes = 13
-frame = 54
+frame = 14
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../CollisionShape2D")
