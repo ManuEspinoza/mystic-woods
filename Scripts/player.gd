@@ -71,10 +71,6 @@ func set_walk():
 	animation_tree["parameters/conditions/is_attacking"] = false
 	state = WALK
 
-func _on_animation_player_animation_finished(anim_name):
-	if anim_name == "dead":
-		health = 0
-
 func _on_damage_area_body_entered(body):
 	if body.is_in_group("EnemyAttack"):
 		handle_enemy_damage(body)
