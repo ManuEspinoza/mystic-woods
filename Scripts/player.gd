@@ -1,4 +1,7 @@
 extends CharacterBody2D
+
+signal health_depleted
+
 @onready var heathbar = $heathbar
 @onready var body = $Body
 @onready var animation_tree = $AnimationTree
@@ -13,7 +16,8 @@ const DOWN = "down"
 
 enum {
 	WALK,
-	ATTACK
+	ATTACK,
+	DEAD
 }
 
 var state = WALK
@@ -80,11 +84,13 @@ func handle_enemy_damage(enemy):
 	var enemy_damage = enemy.damage
 	final_health -= enemy_damage;
 	heathbar.value = final_health
-		
+	
+	health = final_health
+	
 	if final_health <= 0:
+		state = DEAD
 		animation_tree["parameters/conditions/is_dead"] = true
-	else:
-		health = final_health
-		
+		health_depleted.emit()
+	
 	if final_health < 100:
 		heathbar.visible = true

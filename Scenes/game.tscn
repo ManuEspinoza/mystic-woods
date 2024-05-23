@@ -331,3 +331,9 @@ unique_name_in_owner = true
 remote_path = NodePath("../../Camera2D")
 
 [node name="Spawner" parent="." instance=ExtResource("5_aiiui")]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+
+[connection signal="health_depleted" from="Player" to="." method="_on_player_health_depleted"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
