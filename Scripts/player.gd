@@ -14,6 +14,8 @@ const RIGHT = "right"
 const UP = "up"
 const DOWN = "down"
 
+const MAX_HEALTH = 100
+
 enum {
 	WALK,
 	ATTACK,
@@ -71,9 +73,13 @@ func set_walk():
 	animation_tree["parameters/conditions/is_attacking"] = false
 	state = WALK
 
-func _on_damage_area_body_entered(body):
+func _on_body_area_body_entered(body):
 	if body.is_in_group("EnemyAttack"):
 		handle_enemy_damage(body)
+		
+func _on_body_area_area_entered(area):
+	if area.is_in_group("Healer"):
+		handle_health_up(area)
 	
 func handle_enemy_damage(enemy):
 	var final_health = health
@@ -88,5 +94,24 @@ func handle_enemy_damage(enemy):
 		animation_tree["parameters/conditions/is_dead"] = true
 		health_depleted.emit()
 	
-	if final_health < 100:
+	if final_health < MAX_HEALTH:
 		heathbar.visible = true
+
+func handle_health_up(healer):
+	if health < MAX_HEALTH:
+		var health_difference = abs(MAX_HEALTH - health)
+		if health_difference < healer.HEALTH_UP:
+			health += health_difference 
+		else:
+			health += healer.HEALTH_UP
+	
+	heathbar.value = health
+	
+	if health == MAX_HEALTH:
+		heathbar.visible = false
+	
+		
+
+
+
+

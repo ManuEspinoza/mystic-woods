@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3oyswwgetfd"]
+
+[ext_resource type="Texture2D" uid="uid://tp86s424m3xy" path="res://Assets/objects/fruit.png" id="1_1w3da"]
+[ext_resource type="Script" path="res://Scripts/fruit.gd" id="1_2662f"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s6ysf"]
+radius = 4.0
+height = 14.0
+
+[node name="Healer" type="Area2D" groups=["Healer"]]
+script = ExtResource("1_2662f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_s6ysf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_1w3da")
+hframes = 4
+vframes = 4
+frame = 13
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
