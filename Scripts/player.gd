@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var animation_tree = $AnimationTree
 
 const SPEED = 200.0
+
 #Input actions
 const LEFT = "left"
 const RIGHT = "right"
@@ -24,8 +25,7 @@ func _ready():
 	input_direction = Vector2(0, 1)
 	heathbar.visible = false
 	heathbar.value = health
-	animation_tree["parameters/idle/blend_position"] = input_direction
-	animation_tree["parameters/walk/blend_position"] = input_direction
+	update_blend_directions()
 	animation_tree["parameters/attack/blend_position"] = input_direction
 	
 func _physics_process(delta):
@@ -39,20 +39,26 @@ func move_state(delta):
 	input_direction = Input.get_vector(LEFT, RIGHT, UP, DOWN)
 	
 	if input_direction == Vector2.ZERO:
-		animation_tree["parameters/conditions/idle"] = true
-		animation_tree["parameters/conditions/is_walking"] = false
+		set_walk_conditions(false)
 	else:
-		animation_tree["parameters/conditions/idle"] = false
-		animation_tree["parameters/conditions/is_walking"] = true
 		attack_direction = input_direction
-		animation_tree["parameters/idle/blend_position"] = input_direction
-		animation_tree["parameters/walk/blend_position"] = input_direction
+		set_walk_conditions(true)
+		update_blend_directions()
 			
 	if Input.is_action_just_pressed("attack"):
 		state = ATTACK
+		
 	velocity = input_direction * SPEED
 	move_and_slide()
 	
+func set_walk_conditions(walk):
+	animation_tree["parameters/conditions/idle"] = not walk
+	animation_tree["parameters/conditions/is_walking"] = walk
+
+func update_blend_directions():
+	animation_tree["parameters/idle/blend_position"] = input_direction
+	animation_tree["parameters/walk/blend_position"] = input_direction
+
 func attack_state():
 	animation_tree["parameters/attack/blend_position"] = attack_direction
 	animation_tree["parameters/conditions/is_attacking"] = true
