@@ -1,12 +1,21 @@
 extends CharacterBody2D
+
+@onready var game = get_node("/root/Game")
 @onready var player = get_node("/root/Game/Player")
 @onready var animated_sprite = $AnimatedSprite2D
+
+const SPEED = 200.0
+const PROBABILITY = 5
+
+var healer_item := preload("res://Scenes/healer.tscn")
+var target_position
+var dead = false
 
 enum {
 	WALK,
 	DEAD
 }
-const SPEED = 200.0
+
 var damage = 10
 var health = 20
 var state = WALK
@@ -31,10 +40,11 @@ func move_state():
 	else:
 		#knockback
 		target_position = (global_position - player.global_position).normalized()
-		move_and_collide(target_position)
+		move_and_collide(target_position * 2)
 
 func _on_animated_sprite_2d_animation_finished():
 	if animated_sprite.animation == "dead":
+		drop_item()
 		queue_free()
 	if animated_sprite.animation == "recoil":
 		hit = false
@@ -49,4 +59,12 @@ func hanlde_damage(damager):
 	health -= damager.damage
 	if health <= 0:
 		state = DEAD
+
+func drop_item():
+	if (randi() % PROBABILITY) == (PROBABILITY - 1): 
+		var healer = healer_item.instantiate()
+		healer.position = position
+		game.call_deferred("add_child", healer)
+	
+
 		
