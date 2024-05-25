@@ -334,7 +334,6 @@ remote_path = NodePath("../../Camera2D")
 [node name="Spawner" parent="." instance=ExtResource("5_aiiui")]
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
 
 [node name="Healer" parent="." instance=ExtResource("7_n5yc8")]
 position = Vector2(-467, 94)
