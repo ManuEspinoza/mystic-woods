@@ -1,0 +1,85 @@
+[gd_scene load_steps=13 format=3 uid="uid://d3oyswwgetfd"]
+
+[ext_resource type="Script" path="res://Scripts/healer.gd" id="1_2662f"]
+[ext_resource type="Texture2D" uid="uid://c1pg1umpi7u4r" path="res://Assets/objects/heart.png" id="2_ewa6l"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s6ysf"]
+radius = 3.0
+height = 8.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kt6ur"]
+atlas = ExtResource("2_ewa6l")
+region = Rect2(0, 0, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2crwx"]
+atlas = ExtResource("2_ewa6l")
+region = Rect2(18, 0, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4c5sw"]
+atlas = ExtResource("2_ewa6l")
+region = Rect2(36, 0, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5wuuu"]
+atlas = ExtResource("2_ewa6l")
+region = Rect2(54, 0, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ocudw"]
+atlas = ExtResource("2_ewa6l")
+region = Rect2(72, 0, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ntkc"]
+atlas = ExtResource("2_ewa6l")
+region = Rect2(90, 0, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wf8j5"]
+atlas = ExtResource("2_ewa6l")
+region = Rect2(108, 0, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i160n"]
+atlas = ExtResource("2_ewa6l")
+region = Rect2(126, 0, 18, 14)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pli4q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kt6ur")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2crwx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4c5sw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5wuuu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ocudw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ntkc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wf8j5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i160n")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Healer" type="Area2D" groups=["Healer"]]
+script = ExtResource("1_2662f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_s6ysf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-2, 0)
+sprite_frames = SubResource("SpriteFrames_pli4q")
+frame_progress = 0.976788
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
