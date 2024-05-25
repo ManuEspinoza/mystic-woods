@@ -4,11 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://dfmw83pgthvml" path="res://Assets/characters/player.png" id="1_3wi3f"]
 [ext_resource type="Script" path="res://Scripts/sword.gd" id="3_tn5ue"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_hdn1i"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hlvgf"]
+radius = 9.0
+height = 18.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hewva"]
-radius = 5.0
-height = 18.0
+radius = 3.0
+height = 12.0
 
 [sub_resource type="Animation" id="Animation_yma2e"]
 length = 0.001
@@ -499,9 +501,9 @@ script = ExtResource("1_0qppv")
 [node name="BodyArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BodyArea"]
-position = Vector2(0, 9)
+position = Vector2(-1.90735e-06, 8)
 scale = Vector2(0.48, 1)
-shape = SubResource("CircleShape2D_hdn1i")
+shape = SubResource("CapsuleShape2D_hlvgf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 9)
@@ -517,7 +519,7 @@ libraries = {
 texture = ExtResource("1_3wi3f")
 hframes = 6
 vframes = 13
-frame = 16
+frame = 12
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../CollisionShape2D")

@@ -86,7 +86,6 @@ func handle_enemy_damage(enemy):
 	var enemy_damage = enemy.damage
 	final_health -= enemy_damage;
 	heathbar.value = final_health
-	
 	health = final_health
 	
 	if final_health <= 0:
@@ -109,9 +108,4 @@ func handle_health_up(healer):
 	
 	if health == MAX_HEALTH:
 		heathbar.visible = false
-	
-		
-
-
-
 
