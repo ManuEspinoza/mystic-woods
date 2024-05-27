@@ -80,6 +80,8 @@ func _on_body_area_body_entered(body):
 func _on_body_area_area_entered(area):
 	if area.is_in_group("Healer"):
 		handle_health_up(area)
+	elif area.is_in_group("WariorAttack"):
+		handle_enemy_damage(area)
 	
 func handle_enemy_damage(enemy):
 	var final_health = health

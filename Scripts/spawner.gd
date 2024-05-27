@@ -21,5 +21,5 @@ func spawn():
 	enemy.position = spwan.position
 	game.add_child(enemy)
 
-func _on_timer_timeout():
-	spawn()
+#func _on_timer_timeout():
+	#spawn()

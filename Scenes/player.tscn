@@ -495,7 +495,7 @@ size = Vector2(11, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ce4kf"]
 size = Vector2(11, 20)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_0qppv")
 
 [node name="BodyArea" type="Area2D" parent="."]
