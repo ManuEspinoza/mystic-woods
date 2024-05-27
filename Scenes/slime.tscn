@@ -163,7 +163,7 @@ script = ExtResource("1_js3og")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_kaoax")
-animation = &"recoil"
+animation = &"move"
 autoplay = "move"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

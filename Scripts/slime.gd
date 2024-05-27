@@ -4,18 +4,16 @@ extends CharacterBody2D
 @onready var player = get_node("/root/Game/Player")
 @onready var animated_sprite = $AnimatedSprite2D
 
+enum {
+	WALK,
+	DEAD
+}
 const SPEED = 200.0
 const PROBABILITY = 5
 
 var healer_item := preload("res://Scenes/healer.tscn")
 var target_position
 var dead = false
-
-enum {
-	WALK,
-	DEAD
-}
-
 var damage = 10
 var health = 20
 var state = WALK

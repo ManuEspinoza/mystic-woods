@@ -1,4 +1,4 @@
-extends Area2D
+class_name Healer extends Area2D
 
 const HEALTH_UP = 20
 
