@@ -319,7 +319,7 @@ frame = 103
 
 [node name="Attacks" type="Node2D" parent="."]
 
-[node name="Attack_left" type="Area2D" parent="Attacks" groups=["WariorAttack"]]
+[node name="Attack_left" type="Area2D" parent="Attacks" groups=["Attack"]]
 script = ExtResource("6_rarew")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attacks/Attack_left"]
@@ -327,7 +327,7 @@ position = Vector2(-12, 3)
 shape = SubResource("RectangleShape2D_4p8pa")
 disabled = true
 
-[node name="Attack_right" type="Area2D" parent="Attacks" groups=["WariorAttack"]]
+[node name="Attack_right" type="Area2D" parent="Attacks" groups=["Attack"]]
 script = ExtResource("6_rarew")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attacks/Attack_right"]

@@ -4,6 +4,5 @@ signal getting_hit
 
 func _on_area_entered(area):
 	if area.is_in_group("Sword"):
-		print(area.damage)
 		health_component.take_damage(area.damage)
 		getting_hit.emit()

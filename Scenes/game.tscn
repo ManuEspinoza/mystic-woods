@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cn51vs8svm3vr"]
+[gd_scene load_steps=12 format=3 uid="uid://cn51vs8svm3vr"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_ecb3v"]
 [ext_resource type="Texture2D" uid="uid://co28t0dhsungp" path="res://Assets/tilesets/floors/flooring.png" id="1_gcpcb"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://2n6hded5sdl8" path="res://Scenes/spawner.tscn" id="5_aiiui"]
 [ext_resource type="PackedScene" uid="uid://7audpf70ehds" path="res://Scenes/player.tscn" id="6_ibyl7"]
 [ext_resource type="PackedScene" uid="uid://dy5ud8f1u735x" path="res://Scenes/healer.tscn" id="7_n5yc8"]
-[ext_resource type="PackedScene" uid="uid://canfikl3ep1yk" path="res://Scenes/warior.tscn" id="7_p378s"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ev0fp"]
 texture = ExtResource("1_gcpcb")
@@ -332,12 +331,10 @@ unique_name_in_owner = true
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
 
-[node name="Spawner" parent="." instance=ExtResource("5_aiiui")]
+[node name="Spawner" parent="." node_paths=PackedStringArray("tileMap") instance=ExtResource("5_aiiui")]
+tileMap = NodePath("../TileMap")
 
 [node name="Timer" type="Timer" parent="."]
-
-[node name="Warior" parent="." instance=ExtResource("7_p378s")]
-position = Vector2(317, -27)
 
 [node name="Healer" parent="." instance=ExtResource("7_n5yc8")]
 position = Vector2(-467, 94)

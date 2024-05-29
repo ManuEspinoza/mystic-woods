@@ -1,6 +1,7 @@
-class_name Warior extends CharacterBody2D
+class_name Mage extends CharacterBody2D
 @export var animation_tree: AnimationTree
 @export var health_component: HealthComponent
+
 @onready var player = get_node("/root/Game/Player")
 enum {
 	WALK,
@@ -8,7 +9,7 @@ enum {
 	KNOCKBACK,
 	DEAD
 }
-
+const SPELL = preload("res://Scenes/spell.tscn")
 var healer_item := preload("res://Scenes/healer.tscn")
 var target_position
 var damage = 10
@@ -75,3 +76,9 @@ func set_animtion_tree_condition(condition):
 	animation_tree["parameters/conditions/is_walking"] = false
 	animation_tree["parameters/conditions/is_dead"] = false
 	animation_tree[condition] = true
+
+func cast_spell():
+	var spell_instance := SPELL.instantiate()
+	spell_instance.position = global_position
+	spell_instance.direction = global_position.direction_to(player.global_position)
+	add_child(spell_instance)
