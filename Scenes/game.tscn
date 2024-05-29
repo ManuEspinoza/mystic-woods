@@ -331,8 +331,7 @@ unique_name_in_owner = true
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
 
-[node name="Spawner" parent="." node_paths=PackedStringArray("tileMap") instance=ExtResource("5_aiiui")]
-tileMap = NodePath("../TileMap")
+[node name="Spawner" parent="." instance=ExtResource("5_aiiui")]
 
 [node name="Timer" type="Timer" parent="."]
 

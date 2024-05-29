@@ -1,0 +1,154 @@
+[gd_scene load_steps=22 format=3 uid="uid://buvp0ylrbn46e"]
+
+[ext_resource type="Script" path="res://Scripts/portal.gd" id="1_ltdhj"]
+[ext_resource type="Texture2D" uid="uid://dfwkohav4n7tv" path="res://Assets/objects/portals.png" id="1_m8aj5"]
+[ext_resource type="PackedScene" uid="uid://c3e26up8ki4qn" path="res://Scenes/health_component.tscn" id="1_u81p8"]
+[ext_resource type="PackedScene" uid="uid://deu3y82ribk71" path="res://Scenes/hurtbox_component.tscn" id="2_i0uhb"]
+[ext_resource type="Texture2D" uid="uid://b8lfe08mcn3ki" path="res://Assets/objects/Explosion.png" id="4_rubi4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jr58d"]
+radius = 16.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_38yxh"]
+atlas = ExtResource("4_rubi4")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0vbjb"]
+atlas = ExtResource("4_rubi4")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_phrvo"]
+atlas = ExtResource("4_rubi4")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_is2o0"]
+atlas = ExtResource("4_rubi4")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nq0kh"]
+atlas = ExtResource("4_rubi4")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_63wbf"]
+atlas = ExtResource("4_rubi4")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eek46"]
+atlas = ExtResource("4_rubi4")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xf4fw"]
+atlas = ExtResource("4_rubi4")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_apmp7"]
+atlas = ExtResource("4_rubi4")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bw1qv"]
+atlas = ExtResource("4_rubi4")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_115f0"]
+atlas = ExtResource("1_m8aj5")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tlaol"]
+atlas = ExtResource("1_m8aj5")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rhosb"]
+atlas = ExtResource("1_m8aj5")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_712s5"]
+atlas = ExtResource("1_m8aj5")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mnh6v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_38yxh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0vbjb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_phrvo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_is2o0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nq0kh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_63wbf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eek46")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xf4fw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_apmp7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bw1qv")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_115f0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tlaol")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rhosb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_712s5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Portal" type="Marker2D"]
+script = ExtResource("1_ltdhj")
+
+[node name="HealthComponent" parent="." instance=ExtResource("1_u81p8")]
+max_health = 100
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("2_i0uhb")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_jr58d")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = 0.785398
+sprite_frames = SubResource("SpriteFrames_mnh6v")
+animation = &"dead"
+autoplay = "default"
+frame = 9
+frame_progress = 1.0
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+modulate = Color(0.153526, 0.550098, 0.201743, 1)
+offset_left = -10.0
+offset_top = 19.0
+offset_right = 190.0
+offset_bottom = 59.0
+scale = Vector2(0.1, 0.1)
+show_percentage = false
+
+[connection signal="health_depleted" from="HealthComponent" to="." method="_on_health_component_health_depleted"]
+[connection signal="getting_hit" from="HurtboxComponent" to="." method="_on_hurtbox_component_getting_hit"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
