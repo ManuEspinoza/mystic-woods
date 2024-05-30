@@ -1,5 +1,8 @@
 extends Node2D
 const slime_scene := preload("res://Scenes/slime.tscn")
+const mage_scene := preload("res://Scenes/mage.tscn")
+const warior_scene := preload("res://Scenes/warior.tscn")
+const PORTAL = preload("res://Scenes/portal.tscn")
 @onready var timer = $Timer
 @onready var game = get_node("/root/Game")
 var portals := []

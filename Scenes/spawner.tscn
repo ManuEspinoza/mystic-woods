@@ -1,25 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://2n6hded5sdl8"]
+[gd_scene load_steps=2 format=3 uid="uid://2n6hded5sdl8"]
 
 [ext_resource type="Script" path="res://Scripts/spawner.gd" id="1_uklym"]
-[ext_resource type="PackedScene" uid="uid://buvp0ylrbn46e" path="res://Scenes/portal.tscn" id="2_oe6s1"]
 
 [node name="Spawner" type="Node2D"]
 script = ExtResource("1_uklym")
 
-[node name="Portal" parent="." instance=ExtResource("2_oe6s1")]
-position = Vector2(463, 317)
-
-[node name="Portal2" parent="." instance=ExtResource("2_oe6s1")]
-position = Vector2(-459, -315)
-
-[node name="Portal3" parent="." instance=ExtResource("2_oe6s1")]
-position = Vector2(-460, 315)
-
-[node name="Portal4" parent="." instance=ExtResource("2_oe6s1")]
-position = Vector2(422, -346)
-
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
 
-[connection signal="destroyed_portal" from="Portal" to="." method="_on_portal_destroyed_portal"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
