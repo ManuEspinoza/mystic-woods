@@ -308,6 +308,7 @@ sources/2 = SubResource("TileSetAtlasSource_jxyly")
 [node name="Game" type="Node2D"]
 position = Vector2(1, 0)
 script = ExtResource("1_ecb3v")
+top_left = Vector2(-490, -430)
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_81ups")
@@ -344,5 +345,7 @@ position = Vector2(239, 352)
 [node name="Healer3" parent="." instance=ExtResource("7_n5yc8")]
 position = Vector2(-315, -409)
 
+[connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
 [connection signal="health_depleted" from="Player" to="." method="_on_player_health_depleted"]
+[connection signal="all_portals_destroyed" from="Spawner" to="." method="_on_spawner_all_portals_destroyed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
