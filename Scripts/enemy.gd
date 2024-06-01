@@ -18,6 +18,7 @@ var damage = 10
 var state = WALK
 
 func _physics_process(delta):
+	body.disabled = false
 	get_facing_direction()
 	match state:
 		WALK:
