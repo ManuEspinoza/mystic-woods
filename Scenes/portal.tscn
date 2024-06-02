@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://buvp0ylrbn46e"]
+[gd_scene load_steps=17 format=3 uid="uid://buvp0ylrbn46e"]
 
 [ext_resource type="Script" path="res://Scripts/portal.gd" id="1_ltdhj"]
 [ext_resource type="PackedScene" uid="uid://c3e26up8ki4qn" path="res://Scenes/health_component.tscn" id="1_u81p8"]
@@ -84,6 +84,9 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_8haky"]
+radius = 16.1245
+
 [node name="Portal" type="Marker2D"]
 script = ExtResource("1_ltdhj")
 
@@ -114,6 +117,11 @@ offset_right = 190.0
 offset_bottom = 59.0
 scale = Vector2(0.1, 0.1)
 show_percentage = false
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("CircleShape2D_8haky")
 
 [connection signal="health_depleted" from="HealthComponent" to="." method="_on_health_component_health_depleted"]
 [connection signal="getting_hit" from="HurtboxComponent" to="." method="_on_hurtbox_component_getting_hit"]

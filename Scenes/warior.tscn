@@ -316,7 +316,7 @@ parameters/walk/blend_position = Vector2(-1, 0)
 texture = ExtResource("3_l71se")
 hframes = 13
 vframes = 10
-frame = 103
+frame = 102
 
 [node name="Attacks" type="Node2D" parent="."]
 
