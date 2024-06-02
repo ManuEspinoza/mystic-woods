@@ -1,0 +1,38 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://bsdgouskuq1vj"]
+
+[ext_resource type="FontFile" uid="uid://boijg60d5iq1f" path="res://Assets/fonts/Toriko.ttf" id="1_i2h18"]
+[ext_resource type="Texture2D" uid="uid://d0pmv4efkot22" path="res://Assets/objects/UI_Wood_Button_Large_Lock_01a2.png" id="2_ypl28"]
+[ext_resource type="Texture2D" uid="uid://darkswihj5yjq" path="res://Assets/objects/UI_Wood_Button_Large_Lock_01a3.png" id="3_ebc63"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o2m0e"]
+texture = ExtResource("2_ypl28")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fjam7"]
+texture = ExtResource("2_ypl28")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dnyfv"]
+texture = ExtResource("3_ebc63")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+
+[resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/constants/outline_size = 8
+Button/font_sizes/font_size = 32
+Button/fonts/font = ExtResource("1_i2h18")
+Button/styles/hover = SubResource("StyleBoxTexture_o2m0e")
+Button/styles/normal = SubResource("StyleBoxTexture_fjam7")
+Button/styles/pressed = SubResource("StyleBoxTexture_dnyfv")
+Label/font_sizes/font_size = 32
+Label/fonts/font = ExtResource("1_i2h18")
