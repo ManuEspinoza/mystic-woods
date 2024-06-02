@@ -11,7 +11,7 @@ func set_title(win):
 
 func _on_restart_pressed():
 	get_tree().paused = false
-	get_tree().root.get_child(0).reload_current_scene()
+	get_tree().change_scene_to_file("res://Scenes/game.tscn")
 
 func _on_quit_pressed():
 	get_tree().quit()
