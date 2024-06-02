@@ -11,9 +11,17 @@ config_version=5
 [application]
 
 config/name="mystic-woods"
-run/main_scene="res://Scenes/game.tscn"
+run/main_scene="res://Scenes/background.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/stretch/mode="canvas_items"
+
+[gui]
+
+theme/custom="res://Themes/mystic-theme.tres"
 
 [input]
 
