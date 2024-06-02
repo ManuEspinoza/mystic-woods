@@ -33,6 +33,5 @@ func discount_enemies():
 
 func game_over(win):
 	var game_over_screen := GAME_OVER_SCREEN.instantiate()
-	add_child(game_over_screen)
+	add_child.call_deferred(game_over_screen)
 	game_over_screen.set_title(win)
-	get_tree().paused = true
