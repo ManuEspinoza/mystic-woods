@@ -2,11 +2,12 @@
 
 [ext_resource type="Script" path="res://Scripts/gameOverScreen.gd" id="1_2tgpw"]
 
-[node name="GameOverScreen" type="CanvasLayer"]
+[node name="GameOverScreen" type="CanvasLayer" node_paths=PackedStringArray("title")]
 process_mode = 3
 process_priority = 1
 process_physics_priority = 1
 script = ExtResource("1_2tgpw")
+title = NodePath("PanelContainer/MarginContainer/Rows/Title")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchors_preset = 15

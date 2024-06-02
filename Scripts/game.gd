@@ -2,8 +2,9 @@ extends Node2D
 @export var top_left := Vector2(1,1) # your co-ords here
 @export var bot_right := Vector2(500,410) # your co-ords here
 @onready var timer = $Timer
-var all_portals_destroyed := false
 const GAME_OVER_SCREEN = preload("res://Scenes/game_over_screen.tscn")
+var all_portals_destroyed := false
+var enemy_count = 0
 
 func _on_player_health_depleted():
 	Engine.time_scale = 0.5
@@ -15,17 +16,19 @@ func _on_timer_timeout():
 
 func _on_spawner_all_portals_destroyed():
 	all_portals_destroyed = true
-	count_enemies()
+	if enemy_count <= 0:
+		game_over(true)
 
 func _on_child_exiting_tree(node):
-	count_enemies()
+	if node is Enemy:
+		discount_enemies()
+func _on_child_entered_tree(node):
+	if node is Enemy:
+		enemy_count += 1
 
-func count_enemies():
-	var count = 0
-	for i in get_children():
-		if i is Enemy:
-			count += 1
-	if count < 1 and all_portals_destroyed:
+func discount_enemies():
+	enemy_count -= 1
+	if enemy_count <= 0 && all_portals_destroyed:
 		game_over(true)
 
 func game_over(win):
@@ -33,4 +36,3 @@ func game_over(win):
 	add_child(game_over_screen)
 	game_over_screen.set_title(win)
 	get_tree().paused = true
-
