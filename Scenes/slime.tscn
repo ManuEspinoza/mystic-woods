@@ -1,13 +1,9 @@
-[gd_scene load_steps=34 format=3 uid="uid://jyxt1drt7s3c"]
+[gd_scene load_steps=32 format=3 uid="uid://jyxt1drt7s3c"]
 
 [ext_resource type="Texture2D" uid="uid://dbx3nmu76cdn3" path="res://Assets/characters/slime.png" id="1_ecnxh"]
 [ext_resource type="Script" path="res://Scripts/slime.gd" id="1_js3og"]
-[ext_resource type="PackedScene" uid="uid://nnohh1wrwatb" path="res://Scenes/attack_range_component.tscn" id="2_bkils"]
 [ext_resource type="PackedScene" uid="uid://c3e26up8ki4qn" path="res://Scenes/health_component.tscn" id="2_jm636"]
 [ext_resource type="PackedScene" uid="uid://deu3y82ribk71" path="res://Scenes/hurtbox_component.tscn" id="3_dydwp"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_nvqfe"]
-radius = 39.3192
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1p1rl"]
 
@@ -140,19 +136,27 @@ blend_mode = 1
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ao704"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_48n2w"]
-advance_mode = 2
-advance_condition = &"is_attacking"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ojbdq"]
-advance_mode = 2
-advance_condition = &"is_walking"
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_euxgo"]
 advance_mode = 2
 advance_condition = &"is_hit"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gsu0o"]
+advance_mode = 2
+advance_condition = &"is_walking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_723x8"]
+advance_mode = 2
+advance_condition = &"is_dead"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w1xr5"]
+advance_mode = 2
+advance_condition = &"is_dead"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_48n2w"]
+advance_mode = 2
+advance_condition = &"is_attacking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ojbdq"]
 advance_mode = 2
 advance_condition = &"is_walking"
 
@@ -163,14 +167,6 @@ advance_condition = &"is_attacking"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pvend"]
 advance_mode = 2
 advance_condition = &"is_hit"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_723x8"]
-advance_mode = 2
-advance_condition = &"is_dead"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w1xr5"]
-advance_mode = 2
-advance_condition = &"is_dead"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0fi3i"]
 advance_mode = 2
@@ -185,19 +181,14 @@ states/knockback/node = SubResource("AnimationNodeBlendSpace2D_y1vmi")
 states/knockback/position = Vector2(483.333, 172.444)
 states/walk/node = SubResource("AnimationNodeBlendSpace2D_p5mrl")
 states/walk/position = Vector2(318, 171.333)
-transitions = ["Start", "walk", SubResource("AnimationNodeStateMachineTransition_ao704"), "walk", "attack", SubResource("AnimationNodeStateMachineTransition_48n2w"), "attack", "walk", SubResource("AnimationNodeStateMachineTransition_ojbdq"), "walk", "knockback", SubResource("AnimationNodeStateMachineTransition_euxgo"), "knockback", "walk", SubResource("AnimationNodeStateMachineTransition_gsu0o"), "knockback", "attack", SubResource("AnimationNodeStateMachineTransition_ai5gd"), "attack", "knockback", SubResource("AnimationNodeStateMachineTransition_pvend"), "walk", "dead", SubResource("AnimationNodeStateMachineTransition_723x8"), "knockback", "dead", SubResource("AnimationNodeStateMachineTransition_w1xr5"), "attack", "dead", SubResource("AnimationNodeStateMachineTransition_0fi3i")]
+transitions = ["Start", "walk", SubResource("AnimationNodeStateMachineTransition_ao704"), "walk", "knockback", SubResource("AnimationNodeStateMachineTransition_euxgo"), "knockback", "walk", SubResource("AnimationNodeStateMachineTransition_gsu0o"), "walk", "dead", SubResource("AnimationNodeStateMachineTransition_723x8"), "knockback", "dead", SubResource("AnimationNodeStateMachineTransition_w1xr5"), "walk", "attack", SubResource("AnimationNodeStateMachineTransition_48n2w"), "attack", "walk", SubResource("AnimationNodeStateMachineTransition_ojbdq"), "knockback", "attack", SubResource("AnimationNodeStateMachineTransition_ai5gd"), "attack", "knockback", SubResource("AnimationNodeStateMachineTransition_pvend"), "attack", "dead", SubResource("AnimationNodeStateMachineTransition_0fi3i")]
 
 [node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree", "health_component", "body") groups=["EnemyAttack"]]
 script = ExtResource("1_js3og")
 animation_tree = NodePath("AnimationTree")
 health_component = NodePath("HealthComponent")
 body = NodePath("CollisionShape2D")
-
-[node name="AttackRangeComponent" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("2_bkils")]
-collision_shape = NodePath("CollisionShape2D")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRangeComponent"]
-shape = SubResource("CircleShape2D_nvqfe")
+body_damage = 10
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_jm636")]
 max_health = 10
@@ -217,7 +208,7 @@ shape = SubResource("CircleShape2D_p53gj")
 texture = ExtResource("1_ecnxh")
 hframes = 7
 vframes = 13
-frame = 24
+frame = 25
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -236,6 +227,5 @@ parameters/dead/blend_position = Vector2(0, 0)
 parameters/knockback/blend_position = Vector2(0, 0)
 parameters/walk/blend_position = Vector2(0, 0)
 
-[connection signal="on_range" from="AttackRangeComponent" to="." method="_on_attack_range_component_on_range"]
 [connection signal="health_depleted" from="HealthComponent" to="." method="_on_health_component_health_depleted"]
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]

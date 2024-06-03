@@ -2,6 +2,8 @@ class_name Enemy extends CharacterBody2D
 @export var animation_tree: AnimationTree
 @export var health_component: HealthComponent
 @export var body: CollisionShape2D
+@export var body_damage: int = 0
+
 @onready var player = get_node("/root/Game/Player")
 @onready var game = get_node("/root/Game")
 

@@ -19,7 +19,7 @@ position = Vector2(-460, 315)
 position = Vector2(422, -346)
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 2.5
+wait_time = 1.5
 
 [connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
 [connection signal="property_list_changed" from="." to="." method="_on_property_list_changed"]

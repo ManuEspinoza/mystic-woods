@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Scripts/sword.gd" id="3_tn5ue"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hlvgf"]
-radius = 9.0
+radius = 8.33334
 height = 18.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hewva"]
@@ -520,7 +520,7 @@ libraries = {
 texture = ExtResource("1_3wi3f")
 hframes = 6
 vframes = 13
-frame = 77
+frame = 13
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../CollisionShape2D")
@@ -576,6 +576,9 @@ offset_right = 212.0
 offset_bottom = 34.0
 scale = Vector2(0.1, 0.1)
 show_percentage = false
+
+[node name="Damage Timer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="area_entered" from="BodyArea" to="." method="_on_body_area_area_entered"]
 [connection signal="body_entered" from="BodyArea" to="." method="_on_body_area_body_entered"]

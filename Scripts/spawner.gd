@@ -31,6 +31,7 @@ func populate_portals():
 		
 func spawn():
 	#pick random spawner
+	randomize()
 	if !portals.size():
 		return
 	var portal = portals[randi() % portals.size()]
