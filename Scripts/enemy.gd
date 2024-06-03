@@ -18,7 +18,6 @@ var damage = 10
 var state = WALK
 
 func _physics_process(delta):
-	body.disabled = false
 	get_facing_direction()
 	match state:
 		WALK:
@@ -45,22 +44,25 @@ func blend_position(facing_direction):
 	animation_tree["parameters/knockback/blend_position"] = facing_direction	
 	
 func dead_state():
+	body.disabled = true
 	set_animtion_tree_condition("parameters/conditions/is_dead")
 	
 	
 func move_state():
+	body.disabled = false
 	set_animtion_tree_condition("parameters/conditions/is_walking")
 	target_position = (player.position - position).normalized()
 	move_and_collide(target_position * 2)
 	
 func knockback_state():
+	body.disabled = false
 	set_animtion_tree_condition("parameters/conditions/is_hit")
 	target_position = (global_position - player.global_position).normalized()
 	move_and_collide(target_position * 2)
 	
 func attack_state():
+	body.disabled = false
 	set_animtion_tree_condition("parameters/conditions/is_attacking")
-	body.disabled = true
 
 func _on_health_component_health_depleted():
 	state = DEAD
