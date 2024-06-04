@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 signal health_depleted
 
@@ -6,6 +6,7 @@ signal health_depleted
 @onready var animation_tree = $AnimationTree
 @onready var body_area = $BodyArea
 @onready var damage_timer = $"Damage Timer"
+@onready var sprite = $Body
 
 const SPEED = 200.0
 
@@ -15,6 +16,7 @@ const RIGHT = "right"
 const UP = "up"
 const DOWN = "down"
 
+const FLICKERS_TIME = 0.2
 const MAX_HEALTH = 100
 
 enum {
@@ -76,6 +78,12 @@ func handle_damage_dealed(damage):
 	if final_health < MAX_HEALTH:
 		heathbar.visible = true
 	damage_timer.start()
+	flick_sprite()
+	
+func flick_sprite():
+	sprite.modulate = Color.RED
+	await get_tree().create_timer(FLICKERS_TIME).timeout
+	sprite.modulate = Color.WHITE
 
 func handle_health_up(healer):
 	if health < MAX_HEALTH:

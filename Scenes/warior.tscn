@@ -269,12 +269,13 @@ size = Vector2(15, 30)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y1874"]
 size = Vector2(15, 30)
 
-[node name="Warior" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree", "health_component", "body") groups=["EnemyAttack"]]
+[node name="Warior" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree", "health_component", "body", "attack_range") groups=["EnemyAttack"]]
 script = ExtResource("1_e85uw")
 animation_tree = NodePath("AnimationTree")
 health_component = NodePath("HealthComponent")
 body = NodePath("CollisionShape2D")
 body_damage = 20
+attack_range = NodePath("AttackRangeComponent")
 
 [node name="AttackRangeComponent" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("2_o1w07")]
 collision_shape = NodePath("CollisionShape2D")
@@ -339,7 +340,6 @@ position = Vector2(13, 3.5)
 shape = SubResource("RectangleShape2D_y1874")
 disabled = true
 
-[connection signal="on_range" from="AttackRangeComponent" to="." method="_on_attack_range_component_on_range"]
 [connection signal="health_depleted" from="HealthComponent" to="." method="_on_health_component_health_depleted"]
 [connection signal="getting_hit" from="HurtboxComponent" to="." method="_on_hurtbox_component_getting_hit"]
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]

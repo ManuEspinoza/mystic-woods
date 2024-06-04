@@ -1,2 +1,2 @@
 extends Area2D
-const damage = 10
+@export var damage := 10

@@ -3,7 +3,7 @@ class_name Enemy extends CharacterBody2D
 @export var health_component: HealthComponent
 @export var body: CollisionShape2D
 @export var body_damage: int = 0
-
+@export var attack_range: AttackRangeComponent
 @onready var player = get_node("/root/Game/Player")
 @onready var game = get_node("/root/Game")
 
@@ -18,9 +18,14 @@ var healer_item := preload("res://Scenes/healer.tscn")
 var target_position
 var damage = 10
 var state = WALK
+var is_dead = false
 
 func _physics_process(delta):
+	if is_dead == true:
+		return
 	get_facing_direction()
+	is_player_in_range()
+		
 	match state:
 		WALK:
 			move_state()
@@ -30,6 +35,14 @@ func _physics_process(delta):
 			attack_state()
 		DEAD:
 			dead_state()
+
+func is_player_in_range():
+	if attack_range == null || animation_tree["parameters/conditions/is_attacking"]:
+		return
+	var bodies = attack_range.get_overlapping_bodies()
+	for body in bodies:
+		if body is Player:
+			state = ATTACK
 
 func get_facing_direction():
 	var direction_to = position.direction_to(player.position)
@@ -41,11 +54,14 @@ func get_facing_direction():
 	blend_position(facing_direction)
 	
 func blend_position(facing_direction):
+	if animation_tree["parameters/conditions/is_attacking"]:
+		return 
 	animation_tree["parameters/attack/blend_position"] = facing_direction
 	animation_tree["parameters/walk/blend_position"] = facing_direction
 	animation_tree["parameters/knockback/blend_position"] = facing_direction	
 	
 func dead_state():
+	is_dead = true
 	body.disabled = true
 	set_animtion_tree_condition("parameters/conditions/is_dead")
 	
@@ -72,9 +88,6 @@ func _on_health_component_health_depleted():
 func _on_hurtbox_component_getting_hit():
 	if health_component.current_health > 0:
 		state = KNOCKBACK
-
-func _on_attack_range_component_on_range():
-	state = ATTACK
 
 func _on_animation_tree_animation_finished(anim_name):
 	if anim_name != "dead":
