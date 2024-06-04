@@ -369,13 +369,17 @@ size = Vector2(20.5, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y1874"]
 size = Vector2(20.5, 32)
 
-[node name="Warior" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree", "health_component", "body", "attack_range") groups=["EnemyAttack"]]
+[node name="Warior" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree", "health_component", "body", "attack_range", "navigation_agent", "navigation_timer") groups=["EnemyAttack"]]
+motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_e85uw")
 animation_tree = NodePath("AnimationTree")
 health_component = NodePath("HealthComponent")
 body = NodePath("CollisionShape2D")
 body_damage = 20
 attack_range = NodePath("AttackRangeComponent")
+navigation_agent = NodePath("NavigationAgent2D")
+navigation_timer = NodePath("NavigationTimer")
 
 [node name="AttackRangeComponent" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("2_o1w07")]
 collision_shape = NodePath("CollisionShape2D")
@@ -420,7 +424,7 @@ parameters/walk/blend_position = Vector2(-1, 0)
 texture = ExtResource("5_o3guk")
 hframes = 6
 vframes = 15
-frame = 51
+frame = 83
 
 [node name="Attacks" type="Node2D" parent="."]
 
@@ -440,6 +444,14 @@ position = Vector2(10.75, 3)
 shape = SubResource("RectangleShape2D_y1874")
 disabled = true
 
+[node name="NavigationTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_path_custom_color = Color(0.922405, 0, 0.43247, 1)
+
 [connection signal="health_depleted" from="HealthComponent" to="." method="_on_health_component_health_depleted"]
 [connection signal="getting_hit" from="HurtboxComponent" to="." method="_on_hurtbox_component_getting_hit"]
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
+[connection signal="timeout" from="NavigationTimer" to="." method="_on_navigation_timer_timeout"]
