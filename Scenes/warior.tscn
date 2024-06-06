@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/sword.gd" id="6_rarew"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ur27h"]
-radius = 25.0
+radius = 21.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jsp6"]
 size = Vector2(15, 29)
@@ -264,26 +264,31 @@ states/walk/position = Vector2(249.333, 99.8519)
 transitions = ["Start", "walk", SubResource("AnimationNodeStateMachineTransition_5g3we"), "walk", "attack", SubResource("AnimationNodeStateMachineTransition_84owo"), "walk", "knockback", SubResource("AnimationNodeStateMachineTransition_r4fmy"), "walk", "dead", SubResource("AnimationNodeStateMachineTransition_weoop"), "attack", "dead", SubResource("AnimationNodeStateMachineTransition_20ppm"), "knockback", "dead", SubResource("AnimationNodeStateMachineTransition_pq033"), "attack", "knockback", SubResource("AnimationNodeStateMachineTransition_dfq3g"), "attack", "walk", SubResource("AnimationNodeStateMachineTransition_mxnkg"), "knockback", "walk", SubResource("AnimationNodeStateMachineTransition_dvp5y")]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4p8pa"]
-size = Vector2(13, 30)
+size = Vector2(15, 30)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y1874"]
-size = Vector2(12, 28)
+size = Vector2(15, 30)
 
-[node name="Warior" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree", "health_component")]
+[node name="Warior" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree", "health_component", "body", "attack_range") groups=["EnemyAttack"]]
 script = ExtResource("1_e85uw")
 animation_tree = NodePath("AnimationTree")
 health_component = NodePath("HealthComponent")
+body = NodePath("CollisionShape2D")
+body_damage = 20
+attack_range = NodePath("AttackRangeComponent")
 
 [node name="AttackRangeComponent" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("2_o1w07")]
 collision_shape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRangeComponent"]
+position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_ur27h")
 
 [node name="HealthComponent" parent="." instance=ExtResource("1_a4q1m")]
 max_health = 30
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("2_tybdw")]
+visible = false
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
@@ -323,7 +328,7 @@ frame = 103
 script = ExtResource("6_rarew")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attacks/Attack_left"]
-position = Vector2(-12, 3)
+position = Vector2(-12.75, 3)
 shape = SubResource("RectangleShape2D_4p8pa")
 disabled = true
 
@@ -331,11 +336,10 @@ disabled = true
 script = ExtResource("6_rarew")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attacks/Attack_right"]
-position = Vector2(12, 4)
+position = Vector2(13, 3.5)
 shape = SubResource("RectangleShape2D_y1874")
 disabled = true
 
-[connection signal="on_range" from="AttackRangeComponent" to="." method="_on_attack_range_component_on_range"]
 [connection signal="health_depleted" from="HealthComponent" to="." method="_on_health_component_health_depleted"]
 [connection signal="getting_hit" from="HurtboxComponent" to="." method="_on_hurtbox_component_getting_hit"]
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]

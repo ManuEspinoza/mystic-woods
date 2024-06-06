@@ -1,10 +1,12 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 signal health_depleted
 
 @onready var heathbar = $heathbar
-@onready var body = $Body
 @onready var animation_tree = $AnimationTree
+@onready var body_area = $BodyArea
+@onready var damage_timer = $"Damage Timer"
+@onready var sprite = $Body
 
 const SPEED = 200.0
 
@@ -14,6 +16,7 @@ const RIGHT = "right"
 const UP = "up"
 const DOWN = "down"
 
+const FLICKERS_TIME = 0.2
 const MAX_HEALTH = 100
 
 enum {
@@ -35,11 +38,65 @@ func _ready():
 	animation_tree["parameters/attack/blend_position"] = input_direction
 	
 func _physics_process(delta):
+	handle_enemy_damage()
 	match state:
 		WALK:
 			move_state(delta)
 		ATTACK:
 			attack_state()
+
+func _on_body_area_body_entered(body):
+	handle_enemy_damage()
+		
+func _on_body_area_area_entered(area):
+	if area.is_in_group("Healer"):
+		handle_health_up(area)
+	elif area.is_in_group("Attack"):
+		handle_attack_damage(area)
+
+func handle_attack_damage(attack_area):
+	handle_damage_dealed(attack_area.damage)
+	
+func handle_enemy_damage():
+	for body in body_area.get_overlapping_bodies():
+		if body is Enemy:
+			handle_damage_dealed(body.damage)
+		
+func handle_damage_dealed(damage):
+	if not damage_timer.is_stopped():
+		return
+	var final_health = health
+	final_health -= damage;
+	heathbar.value = final_health
+	health = final_health
+	
+	if final_health <= 0:
+		state = DEAD
+		animation_tree["parameters/conditions/is_dead"] = true
+		health_depleted.emit()
+		
+	if final_health < MAX_HEALTH:
+		heathbar.visible = true
+	damage_timer.start()
+	flick_sprite()
+	
+func flick_sprite():
+	sprite.modulate = Color.RED
+	await get_tree().create_timer(FLICKERS_TIME).timeout
+	sprite.modulate = Color.WHITE
+
+func handle_health_up(healer):
+	if health < MAX_HEALTH:
+		var health_difference = abs(MAX_HEALTH - health)
+		if health_difference < healer.HEALTH_UP:
+			health += health_difference 
+		else:
+			health += healer.HEALTH_UP
+	
+	heathbar.value = health
+	
+	if health == MAX_HEALTH:
+		heathbar.visible = false
 
 func move_state(delta):
 	input_direction = Input.get_vector(LEFT, RIGHT, UP, DOWN)
@@ -72,42 +129,3 @@ func attack_state():
 func set_walk():
 	animation_tree["parameters/conditions/is_attacking"] = false
 	state = WALK
-
-func _on_body_area_body_entered(body):
-	if body.is_in_group("EnemyAttack"):
-		handle_enemy_damage(body)
-		
-func _on_body_area_area_entered(area):
-	if area.is_in_group("Healer"):
-		handle_health_up(area)
-	elif area.is_in_group("Attack"):
-		handle_enemy_damage(area)
-	
-func handle_enemy_damage(enemy):
-	var final_health = health
-	var enemy_damage = enemy.damage
-	final_health -= enemy_damage;
-	heathbar.value = final_health
-	health = final_health
-	
-	if final_health <= 0:
-		state = DEAD
-		animation_tree["parameters/conditions/is_dead"] = true
-		health_depleted.emit()
-	
-	if final_health < MAX_HEALTH:
-		heathbar.visible = true
-
-func handle_health_up(healer):
-	if health < MAX_HEALTH:
-		var health_difference = abs(MAX_HEALTH - health)
-		if health_difference < healer.HEALTH_UP:
-			health += health_difference 
-		else:
-			health += healer.HEALTH_UP
-	
-	heathbar.value = health
-	
-	if health == MAX_HEALTH:
-		heathbar.visible = false
-
