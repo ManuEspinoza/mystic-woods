@@ -34,5 +34,7 @@ Button/fonts/font = ExtResource("1_i2h18")
 Button/styles/hover = SubResource("StyleBoxTexture_o2m0e")
 Button/styles/normal = SubResource("StyleBoxTexture_fjam7")
 Button/styles/pressed = SubResource("StyleBoxTexture_dnyfv")
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 8
 Label/font_sizes/font_size = 32
 Label/fonts/font = ExtResource("1_i2h18")
