@@ -12,7 +12,6 @@ func set_title(win):
 
 func _on_restart_pressed():
 	get_tree().paused = false
-	#get_tree().reload_current_scene()
 	get_tree().change_scene_to_file("res://Scenes/game.tscn")
 	queue_free()
 

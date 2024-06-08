@@ -3,8 +3,13 @@ extends Node2D
 @export var bot_right := Vector2(500,410) # your co-ords here
 @onready var timer = $Timer
 const GAME_OVER_SCREEN = preload("res://Scenes/game_over_screen.tscn")
+const TUTORIAL_SCREEN = preload("res://Scenes/tutorial_screen.tscn")
 var all_portals_destroyed := false
 var enemy_count = 0
+
+func _ready():
+	var tutorial_screen := TUTORIAL_SCREEN.instantiate()
+	add_child.call_deferred(tutorial_screen)
 
 func _on_player_health_depleted():
 	Engine.time_scale = 0.5
