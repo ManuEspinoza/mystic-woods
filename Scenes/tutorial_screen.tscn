@@ -1,11 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://2hbnt4lyyo67"]
+[gd_scene load_steps=9 format=3 uid="uid://2hbnt4lyyo67"]
 
 [ext_resource type="Texture2D" uid="uid://dfmw83pgthvml" path="res://Assets/characters/player.png" id="1_72fka"]
 [ext_resource type="Texture2D" uid="uid://bbvbb2ls8kqu6" path="res://Assets/objects/W.png" id="1_qjbli"]
 [ext_resource type="Texture2D" uid="uid://bl2qdl71iamnf" path="res://Assets/objects/SPACEALTERNATIVE.png" id="2_2bey6"]
+[ext_resource type="Texture2D" uid="uid://dbx3nmu76cdn3" path="res://Assets/characters/slime.png" id="3_qcjp4"]
 [ext_resource type="Texture2D" uid="uid://cmlbvneultvm8" path="res://Assets/objects/A.png" id="4_iisi2"]
 [ext_resource type="Texture2D" uid="uid://b8cpjr7upbl5c" path="res://Assets/objects/S.png" id="5_ogouu"]
 [ext_resource type="Texture2D" uid="uid://c8lg0jupfjiwk" path="res://Assets/objects/D.png" id="6_kokyo"]
+[ext_resource type="Texture2D" uid="uid://bfb5r340hvnpc" path="res://Assets/objects/portal-sprites.png" id="7_tvi0h"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -33,6 +35,33 @@ offset_bottom = 281.0
 texture = ExtResource("1_72fka")
 region_rect = Rect2(65, 310, 20, 26)
 
+[node name="NinePatchRect5" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 460.0
+offset_top = 365.0
+offset_right = 493.0
+offset_bottom = 411.0
+texture = ExtResource("3_qcjp4")
+region_rect = Rect2(74, 134, 12, 18)
+
+[node name="NinePatchRect6" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 410.0
+offset_top = 369.0
+offset_right = 448.0
+offset_bottom = 407.0
+texture = ExtResource("3_qcjp4")
+region_rect = Rect2(104, 384, 24, 24)
+
+[node name="NinePatchRect4" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 329.0
+offset_top = 355.0
+offset_right = 407.0
+offset_bottom = 416.0
+texture = ExtResource("1_72fka")
+region_rect = Rect2(56, 358, 34, 23)
+
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 0
 offset_left = 344.0
@@ -49,6 +78,18 @@ offset_top = 186.0
 offset_right = 392.0
 offset_bottom = 210.0
 text = "MOVE"
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 363.0
+offset_top = 462.0
+offset_right = 542.0
+offset_bottom = 537.0
+text = "KILL ALL ENEMIES 
+DESTROY THE PORTALS 
+WIN!"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="."]
 layout_mode = 0
@@ -93,3 +134,12 @@ offset_right = 594.0
 offset_bottom = 182.0
 texture = ExtResource("6_kokyo")
 stretch_mode = 2
+
+[node name="NinePatchRect3" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 549.0
+offset_top = 349.0
+offset_right = 616.0
+offset_bottom = 417.0
+texture = ExtResource("7_tvi0h")
+region_rect = Rect2(65, 1, 62, 62)
