@@ -5,8 +5,8 @@
 [ext_resource type="AudioStream" uid="uid://sovir5e0w2lh" path="res://Assets/audio/Heart.wav" id="3_lwdbv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s6ysf"]
-radius = 3.0
-height = 8.0
+radius = 8.0
+height = 16.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kt6ur"]
 atlas = ExtResource("2_ewa6l")
