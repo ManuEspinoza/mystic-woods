@@ -1,10 +1,11 @@
-[gd_scene load_steps=38 format=3 uid="uid://nal64h7a040q"]
+[gd_scene load_steps=39 format=3 uid="uid://nal64h7a040q"]
 
 [ext_resource type="Script" path="res://Scripts/mage.gd" id="1_q173n"]
 [ext_resource type="PackedScene" uid="uid://nnohh1wrwatb" path="res://Scenes/attack_range_component.tscn" id="2_3caus"]
 [ext_resource type="PackedScene" uid="uid://c3e26up8ki4qn" path="res://Scenes/health_component.tscn" id="3_pugaw"]
 [ext_resource type="PackedScene" uid="uid://deu3y82ribk71" path="res://Scenes/hurtbox_component.tscn" id="4_gqhqa"]
 [ext_resource type="Texture2D" uid="uid://dw8k3e2v83hb" path="res://Assets/characters/Skeleton Mage.png" id="5_equf0"]
+[ext_resource type="AudioStream" uid="uid://ds7t1ari26wpv" path="res://Assets/audio/Skeleton Hurt.mp3" id="6_yd50f"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1vycg"]
 radius = 86.7006
@@ -17,18 +18,6 @@ size = Vector2(21, 30)
 
 [sub_resource type="Animation" id="Animation_p35g1"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [43]
-}
 
 [sub_resource type="Animation" id="Animation_ionk6"]
 resource_name = "attack_left"
@@ -105,6 +94,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HurtSound:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_qo6l4"]
 resource_name = "knockback_left"
@@ -116,10 +117,22 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"times": PackedFloat32Array(-0.1, 0, 0.1, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [188, 187, 186, 185, 184]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HurtSound:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_k5cs8"]
@@ -136,6 +149,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [63, 64, 65, 66, 67]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HurtSound:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_ka716"]
@@ -305,7 +330,7 @@ shape = SubResource("RectangleShape2D_01njf")
 texture = ExtResource("5_equf0")
 hframes = 21
 vframes = 10
-frame = 43
+frame = 162
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 5)
@@ -332,6 +357,10 @@ parameters/walk/blend_position = Vector2(-0.193631, -0.221429)
 [node name="NavigationTimer" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_yd50f")
+bus = &"SFX"
 
 [connection signal="health_depleted" from="HealthComponent" to="." method="_on_health_component_health_depleted"]
 [connection signal="getting_hit" from="HurtboxComponent" to="." method="_on_hurtbox_component_getting_hit"]

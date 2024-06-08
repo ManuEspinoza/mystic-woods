@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://canfikl3ep1yk"]
+[gd_scene load_steps=53 format=3 uid="uid://canfikl3ep1yk"]
 
 [ext_resource type="PackedScene" uid="uid://c3e26up8ki4qn" path="res://Scenes/health_component.tscn" id="1_a4q1m"]
 [ext_resource type="Script" path="res://Scripts/warior.gd" id="1_e85uw"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://deu3y82ribk71" path="res://Scenes/hurtbox_component.tscn" id="2_tybdw"]
 [ext_resource type="Texture2D" uid="uid://bsqx3wg20vf1y" path="res://Assets/characters/skeleton.png" id="5_o3guk"]
 [ext_resource type="Script" path="res://Scripts/sword.gd" id="6_rarew"]
+[ext_resource type="AudioStream" uid="uid://ds7t1ari26wpv" path="res://Assets/audio/Skeleton Hurt.mp3" id="7_oeeoy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ur27h"]
 radius = 25.0
@@ -90,6 +91,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [72, 73, 74, 75, 76]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_cyj0g"]
 resource_name = "knockback_down"
@@ -105,6 +118,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [66, 67, 68]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_y56jn"]
@@ -122,6 +147,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [60, 61, 62]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_ca8uh"]
 resource_name = "knockback_right"
@@ -138,6 +175,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [54, 55, 56]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_f04ub"]
 resource_name = "knockback_up"
@@ -153,6 +202,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [54, 55, 56]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_5jxl0"]
@@ -424,7 +485,7 @@ parameters/walk/blend_position = Vector2(-1, 0)
 texture = ExtResource("5_o3guk")
 hframes = 6
 vframes = 15
-frame = 83
+frame = 82
 
 [node name="Attacks" type="Node2D" parent="."]
 
@@ -450,6 +511,10 @@ autostart = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 debug_path_custom_color = Color(0.922405, 0, 0.43247, 1)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_oeeoy")
+bus = &"SFX"
 
 [connection signal="health_depleted" from="HealthComponent" to="." method="_on_health_component_health_depleted"]
 [connection signal="getting_hit" from="HurtboxComponent" to="." method="_on_hurtbox_component_getting_hit"]

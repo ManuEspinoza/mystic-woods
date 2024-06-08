@@ -2,6 +2,7 @@ extends Marker2D
 @onready var health_bar = $HealthBar
 @onready var health_component = $HealthComponent
 @onready var animated_sprite_2d = $AnimatedSprite2D
+@onready var hurt = $Hurt
 
 func _ready():
 	health_bar.value = health_component.max_health
@@ -10,6 +11,7 @@ func _on_health_component_health_depleted():
 	animated_sprite_2d.play("dead")
 
 func _on_hurtbox_component_getting_hit():
+	hurt.play()
 	health_bar.value = health_component.current_health
 
 

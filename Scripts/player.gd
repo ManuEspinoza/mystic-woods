@@ -7,6 +7,7 @@ signal health_depleted
 @onready var body_area = $BodyArea
 @onready var damage_timer = $"Damage Timer"
 @onready var sprite = $Body
+@onready var audio_stream_player_2d = $AudioStreamPlayer2D
 
 const SPEED = 200.0
 
@@ -81,6 +82,7 @@ func handle_damage_dealed(damage):
 	flick_sprite()
 	
 func flick_sprite():
+	audio_stream_player_2d.play()
 	sprite.modulate = Color.RED
 	await get_tree().create_timer(FLICKERS_TIME).timeout
 	sprite.modulate = Color.WHITE

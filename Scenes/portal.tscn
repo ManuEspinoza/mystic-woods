@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://buvp0ylrbn46e"]
+[gd_scene load_steps=18 format=3 uid="uid://buvp0ylrbn46e"]
 
 [ext_resource type="Script" path="res://Scripts/portal.gd" id="1_ltdhj"]
 [ext_resource type="PackedScene" uid="uid://c3e26up8ki4qn" path="res://Scenes/health_component.tscn" id="1_u81p8"]
 [ext_resource type="PackedScene" uid="uid://deu3y82ribk71" path="res://Scenes/hurtbox_component.tscn" id="2_i0uhb"]
 [ext_resource type="Texture2D" uid="uid://bfb5r340hvnpc" path="res://Assets/objects/portal-sprites.png" id="4_c34kd"]
+[ext_resource type="AudioStream" uid="uid://cciofuhp3khpi" path="res://Assets/audio/Portal Hurt.mp3" id="5_6pap8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jr58d"]
 radius = 16.0
@@ -124,6 +125,11 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("CircleShape2D_8haky")
+
+[node name="Hurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_6pap8")
+volume_db = -10.0
+bus = &"SFX"
 
 [connection signal="health_depleted" from="HealthComponent" to="." method="_on_health_component_health_depleted"]
 [connection signal="getting_hit" from="HurtboxComponent" to="." method="_on_hurtbox_component_getting_hit"]

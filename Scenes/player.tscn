@@ -1,8 +1,9 @@
-[gd_scene load_steps=52 format=3 uid="uid://7audpf70ehds"]
+[gd_scene load_steps=53 format=3 uid="uid://7audpf70ehds"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_0qppv"]
 [ext_resource type="Texture2D" uid="uid://dfmw83pgthvml" path="res://Assets/characters/player.png" id="1_3wi3f"]
 [ext_resource type="Script" path="res://Scripts/sword.gd" id="3_tn5ue"]
+[ext_resource type="AudioStream" uid="uid://bis50o56xkxqt" path="res://Assets/audio/Hit.mp3" id="4_klvxl"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hlvgf"]
 radius = 8.33334
@@ -520,7 +521,7 @@ libraries = {
 texture = ExtResource("1_3wi3f")
 hframes = 6
 vframes = 13
-frame = 16
+frame = 14
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../CollisionShape2D")
@@ -579,6 +580,11 @@ show_percentage = false
 
 [node name="Damage Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_klvxl")
+volume_db = 24.0
+bus = &"SFX"
 
 [connection signal="area_entered" from="BodyArea" to="." method="_on_body_area_area_entered"]
 [connection signal="body_entered" from="BodyArea" to="." method="_on_body_area_body_entered"]
