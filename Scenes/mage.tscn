@@ -273,13 +273,17 @@ states/walk/node = SubResource("AnimationNodeBlendSpace2D_hhnhp")
 states/walk/position = Vector2(255.333, 105.531)
 transitions = ["Start", "walk", SubResource("AnimationNodeStateMachineTransition_dk7vl"), "walk", "attack", SubResource("AnimationNodeStateMachineTransition_ysnqc"), "attack", "walk", SubResource("AnimationNodeStateMachineTransition_1yb6s"), "walk", "knockback", SubResource("AnimationNodeStateMachineTransition_wgglm"), "knockback", "walk", SubResource("AnimationNodeStateMachineTransition_18pqo"), "attack", "knockback", SubResource("AnimationNodeStateMachineTransition_xob2x"), "walk", "dead", SubResource("AnimationNodeStateMachineTransition_aewl4"), "attack", "dead", SubResource("AnimationNodeStateMachineTransition_k7ekq"), "knockback", "dead", SubResource("AnimationNodeStateMachineTransition_7c5px")]
 
-[node name="Mage" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree", "health_component", "body", "attack_range") groups=["EnemyAttack"]]
+[node name="Mage" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree", "health_component", "body", "attack_range", "navigation_agent", "navigation_timer") groups=["EnemyAttack"]]
+motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_q173n")
 animation_tree = NodePath("AnimationTree")
 health_component = NodePath("HealthComponent")
 body = NodePath("CollisionShape2D")
 body_damage = 5
 attack_range = NodePath("AttackRangeComponent")
+navigation_agent = NodePath("NavigationAgent2D")
+navigation_timer = NodePath("NavigationTimer")
 
 [node name="AttackRangeComponent" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("2_3caus")]
 collision_shape = NodePath("CollisionShape2D")
@@ -323,6 +327,13 @@ parameters/attack/blend_position = Vector2(0, 0)
 parameters/knockback/blend_position = Vector2(0, 0)
 parameters/walk/blend_position = Vector2(-0.193631, -0.221429)
 
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="NavigationTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
 [connection signal="health_depleted" from="HealthComponent" to="." method="_on_health_component_health_depleted"]
 [connection signal="getting_hit" from="HurtboxComponent" to="." method="_on_hurtbox_component_getting_hit"]
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
+[connection signal="timeout" from="NavigationTimer" to="." method="_on_navigation_timer_timeout"]
