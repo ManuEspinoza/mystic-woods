@@ -6,7 +6,6 @@ extends Control
 @onready var main_level = preload("res://Scenes/game.tscn")
 
 func _on_start_button_button_down():
-	Engine.time_scale = 0.5
 	get_tree().change_scene_to_packed(main_level)
 
 func _on_quit_button_button_down():

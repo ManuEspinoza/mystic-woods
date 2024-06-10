@@ -237,7 +237,7 @@ shape = SubResource("CircleShape2D_p53gj")
 texture = ExtResource("1_ecnxh")
 hframes = 7
 vframes = 13
-frame = 23
+frame = 21
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -257,6 +257,8 @@ parameters/knockback/blend_position = Vector2(0, 0)
 parameters/walk/blend_position = Vector2(0, 0)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+radius = 15.0
 
 [node name="NavigationTimer" type="Timer" parent="."]
 wait_time = 0.1
