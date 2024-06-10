@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_0qppv"]
 [ext_resource type="Texture2D" uid="uid://dfmw83pgthvml" path="res://Assets/characters/player.png" id="1_3wi3f"]
-[ext_resource type="Script" path="res://Scripts/sword.gd" id="3_tn5ue"]
+[ext_resource type="Script" path="res://Scripts/damager.gd" id="3_exjtv"]
 [ext_resource type="AudioStream" uid="uid://bis50o56xkxqt" path="res://Assets/audio/Hit.mp3" id="4_klvxl"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hlvgf"]
@@ -521,7 +521,7 @@ libraries = {
 texture = ExtResource("1_3wi3f")
 hframes = 6
 vframes = 13
-frame = 14
+frame = 17
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../CollisionShape2D")
@@ -538,7 +538,7 @@ parameters/walk/blend_position = Vector2(0, 0)
 [node name="Sword" type="Node2D" parent="."]
 
 [node name="AttackUp" type="Area2D" parent="Sword" groups=["Sword"]]
-script = ExtResource("3_tn5ue")
+script = ExtResource("3_exjtv")
 
 [node name="AttackUpCollition" type="CollisionShape2D" parent="Sword/AttackUp"]
 position = Vector2(-1, -4)
@@ -546,7 +546,7 @@ shape = SubResource("RectangleShape2D_yms3f")
 disabled = true
 
 [node name="AttackDown" type="Area2D" parent="Sword" groups=["Sword"]]
-script = ExtResource("3_tn5ue")
+script = ExtResource("3_exjtv")
 
 [node name="AttackDownCollition" type="CollisionShape2D" parent="Sword/AttackDown"]
 position = Vector2(1, 21.5)
@@ -554,7 +554,7 @@ shape = SubResource("RectangleShape2D_dbstn")
 disabled = true
 
 [node name="AttackRight" type="Area2D" parent="Sword" groups=["Sword"]]
-script = ExtResource("3_tn5ue")
+script = ExtResource("3_exjtv")
 
 [node name="AttackRightCollition" type="CollisionShape2D" parent="Sword/AttackRight"]
 position = Vector2(13.5, 12)
@@ -562,7 +562,7 @@ shape = SubResource("RectangleShape2D_tp3ys")
 disabled = true
 
 [node name="AttackLeft" type="Area2D" parent="Sword" groups=["Sword"]]
-script = ExtResource("3_tn5ue")
+script = ExtResource("3_exjtv")
 
 [node name="AttackLeftCollition" type="CollisionShape2D" parent="Sword/AttackLeft"]
 position = Vector2(-13, 10)

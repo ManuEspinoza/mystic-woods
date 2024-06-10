@@ -17,7 +17,8 @@ enum {
 	DEAD
 }
 const PROBABILITY = 5
-var healer_item := preload("res://Scenes/healer.tscn")
+const healer_item := preload("res://Scenes/healer.tscn")
+const shield_item := preload("res://Scenes/droppable_shield.tscn")
 var target_position
 var damage = 10
 var state = WALK
@@ -111,6 +112,12 @@ func drop_item():
 		var healer = healer_item.instantiate()
 		healer.position = position
 		game.call_deferred("add_child", healer)
+		return
+	if (randi() % PROBABILITY) == (PROBABILITY - 1):
+		var shield = shield_item.instantiate()
+		shield.position = position
+		game.call_deferred("add_child", shield)
+		return
 
 func find_path():
 	navigation_agent.target_position = player.global_position

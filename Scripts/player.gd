@@ -50,8 +50,8 @@ func _on_body_area_body_entered(body):
 	handle_enemy_damage()
 		
 func _on_body_area_area_entered(area):
-	if area.is_in_group("Healer"):
-		handle_health_up(area)
+	if area.is_in_group("Droppable"):
+		handle_droppable(area)
 	elif area.is_in_group("Attack"):
 		handle_attack_damage(area)
 
@@ -87,18 +87,8 @@ func flick_sprite():
 	await get_tree().create_timer(FLICKERS_TIME).timeout
 	sprite.modulate = Color.WHITE
 
-func handle_health_up(healer):
-	if health < MAX_HEALTH:
-		var health_difference = abs(MAX_HEALTH - health)
-		if health_difference < healer.HEALTH_UP:
-			health += health_difference 
-		else:
-			health += healer.HEALTH_UP
-	
-	heathbar.value = health
-	
-	if health == MAX_HEALTH:
-		heathbar.visible = false
+func handle_droppable(droppable):
+	droppable.effect(self)
 
 func move_state(delta):
 	input_direction = Input.get_vector(LEFT, RIGHT, UP, DOWN)
