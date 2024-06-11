@@ -588,3 +588,4 @@ bus = &"SFX"
 
 [connection signal="area_entered" from="BodyArea" to="." method="_on_body_area_area_entered"]
 [connection signal="body_entered" from="BodyArea" to="." method="_on_body_area_body_entered"]
+[connection signal="value_changed" from="heathbar" to="." method="_on_heathbar_value_changed"]

@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://bod3jm6hi35sf" path="res://Assets/audio/shield.mp3" id="3_2nh5o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tue7u"]
-radius = 21.0
+radius = 25.0
 
 [sub_resource type="Animation" id="Animation_pcbtp"]
 resource_name = "pickup"

@@ -123,3 +123,9 @@ func attack_state():
 func set_walk():
 	animation_tree["parameters/conditions/is_attacking"] = false
 	state = WALK
+
+func _on_heathbar_value_changed(value):
+	if value == heathbar.max_value:
+		heathbar.visible = false
+	else:
+		heathbar.visible = true
