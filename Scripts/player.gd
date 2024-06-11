@@ -19,6 +19,7 @@ const DOWN = "down"
 
 const FLICKERS_TIME = 0.2
 const MAX_HEALTH = 100
+const INVENCIBILITY_TIME = 1
 
 enum {
 	WALK,
@@ -78,7 +79,7 @@ func handle_damage_dealed(damage):
 		
 	if final_health < MAX_HEALTH:
 		heathbar.visible = true
-	damage_timer.start()
+	damage_timer.start(INVENCIBILITY_TIME)
 	flick_sprite()
 	
 func flick_sprite():
@@ -88,7 +89,8 @@ func flick_sprite():
 	sprite.modulate = Color.WHITE
 
 func handle_droppable(droppable):
-	droppable.effect(self)
+	if droppable.effect:
+		droppable.effect(self)
 
 func move_state(delta):
 	input_direction = Input.get_vector(LEFT, RIGHT, UP, DOWN)

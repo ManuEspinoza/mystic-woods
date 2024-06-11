@@ -108,6 +108,7 @@ func set_animtion_tree_condition(condition):
 	animation_tree[condition] = true
 	
 func drop_item():
+	randomize()
 	if (randi() % PROBABILITY) == (PROBABILITY - 1): 
 		var healer = healer_item.instantiate()
 		healer.position = position
