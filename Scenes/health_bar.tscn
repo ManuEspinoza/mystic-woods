@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://3qfiknfdc255"]
+
+[ext_resource type="Script" path="res://Scenes/health_bar.gd" id="1_m1lkj"]
+[ext_resource type="Texture2D" uid="uid://bysxsmp8xk0ah" path="res://Assets/objects/20-0.png" id="2_mfr6b"]
+[ext_resource type="Texture2D" uid="uid://ci3blgctwkjj6" path="res://Assets/objects/20-inifinity.png" id="2_rilgx"]
+[ext_resource type="Texture2D" uid="uid://bm4454pxsd4cr" path="res://Assets/objects/20-5.png" id="3_iewhn"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_m1lkj")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_right = 200.0
+offset_bottom = 40.0
+scale = Vector2(0.1, 0.1)
+value = 71.0
+nine_patch_stretch = true
+texture_under = ExtResource("2_rilgx")
+texture_over = ExtResource("2_mfr6b")
+texture_progress = ExtResource("3_iewhn")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
