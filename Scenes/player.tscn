@@ -1,9 +1,12 @@
-[gd_scene load_steps=53 format=3 uid="uid://7audpf70ehds"]
+[gd_scene load_steps=56 format=3 uid="uid://7audpf70ehds"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_0qppv"]
 [ext_resource type="Texture2D" uid="uid://dfmw83pgthvml" path="res://Assets/characters/player.png" id="1_3wi3f"]
 [ext_resource type="Script" path="res://Scripts/damager.gd" id="3_exjtv"]
 [ext_resource type="AudioStream" uid="uid://bis50o56xkxqt" path="res://Assets/audio/Hit.mp3" id="4_klvxl"]
+[ext_resource type="Texture2D" uid="uid://ci3blgctwkjj6" path="res://Assets/objects/20-inifinity.png" id="4_uvht3"]
+[ext_resource type="Texture2D" uid="uid://bysxsmp8xk0ah" path="res://Assets/objects/20-0.png" id="5_w65un"]
+[ext_resource type="Texture2D" uid="uid://bm4454pxsd4cr" path="res://Assets/objects/20-5.png" id="6_nmv8i"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hlvgf"]
 radius = 8.33334
@@ -569,14 +572,18 @@ position = Vector2(-13, 10)
 shape = SubResource("RectangleShape2D_ce4kf")
 disabled = true
 
-[node name="heathbar" type="ProgressBar" parent="."]
+[node name="health_bar" type="TextureProgressBar" parent="."]
 modulate = Color(0.4, 0.572549, 0.239216, 1)
-offset_left = 12.0
-offset_top = -6.0
-offset_right = 212.0
-offset_bottom = 34.0
+offset_left = -9.0
+offset_top = 24.0
+offset_right = 191.0
+offset_bottom = 64.0
 scale = Vector2(0.1, 0.1)
-show_percentage = false
+value = 100.0
+nine_patch_stretch = true
+texture_under = ExtResource("4_uvht3")
+texture_over = ExtResource("5_w65un")
+texture_progress = ExtResource("6_nmv8i")
 
 [node name="Damage Timer" type="Timer" parent="."]
 one_shot = true
@@ -588,4 +595,4 @@ bus = &"SFX"
 
 [connection signal="area_entered" from="BodyArea" to="." method="_on_body_area_area_entered"]
 [connection signal="body_entered" from="BodyArea" to="." method="_on_body_area_body_entered"]
-[connection signal="value_changed" from="heathbar" to="." method="_on_heathbar_value_changed"]
+[connection signal="value_changed" from="health_bar" to="." method="_on_health_bar_value_changed"]
