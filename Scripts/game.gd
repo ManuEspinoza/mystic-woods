@@ -4,9 +4,16 @@ extends Node2D
 @onready var timer = $Timer
 const GAME_OVER_SCREEN = preload("res://Scenes/game_over_screen.tscn")
 const TUTORIAL_SCREEN = preload("res://Scenes/tutorial_screen.tscn")
+const PAUSE_SCREEN = preload("res://Scenes/pause_screen.tscn")
+const PAUSE = "pause"
 var all_portals_destroyed := false
 var enemy_count = 0
 
+func _input(event):
+	if event.is_action_pressed(PAUSE):
+		var pause_screen := PAUSE_SCREEN.instantiate()
+		add_child.call_deferred(pause_screen)
+		
 func _ready():
 	var tutorial_screen := TUTORIAL_SCREEN.instantiate()
 	add_child.call_deferred(tutorial_screen)

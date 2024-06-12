@@ -13,8 +13,9 @@ radius = 86.7006
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_01njf"]
 size = Vector2(22, 29)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_suobg"]
-size = Vector2(21, 30)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6lbxq"]
+radius = 6.5
+height = 28.0
 
 [sub_resource type="Animation" id="Animation_p35g1"]
 length = 0.001
@@ -330,11 +331,11 @@ shape = SubResource("RectangleShape2D_01njf")
 texture = ExtResource("5_equf0")
 hframes = 21
 vframes = 10
-frame = 166
+frame = 167
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 5)
-shape = SubResource("RectangleShape2D_suobg")
+shape = SubResource("CapsuleShape2D_6lbxq")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -353,6 +354,7 @@ parameters/knockback/blend_position = Vector2(0, 0)
 parameters/walk/blend_position = Vector2(-0.193631, -0.221429)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
 
 [node name="NavigationTimer" type="Timer" parent="."]
 wait_time = 0.1
