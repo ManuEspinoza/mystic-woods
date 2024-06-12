@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://nnohh1wrwatb" path="res://Scenes/attack_range_component.tscn" id="2_o1w07"]
 [ext_resource type="PackedScene" uid="uid://deu3y82ribk71" path="res://Scenes/hurtbox_component.tscn" id="2_tybdw"]
 [ext_resource type="Texture2D" uid="uid://bsqx3wg20vf1y" path="res://Assets/characters/skeleton.png" id="5_o3guk"]
-[ext_resource type="Script" path="res://Scripts/sword.gd" id="6_rarew"]
+[ext_resource type="Script" path="res://Scripts/damager.gd" id="6_rarew"]
 [ext_resource type="AudioStream" uid="uid://ds7t1ari26wpv" path="res://Assets/audio/Skeleton Hurt.mp3" id="7_oeeoy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ur27h"]

@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1s0lbb2r8g50"]
+
+[ext_resource type="Texture2D" uid="uid://bw21njbpfovhv" path="res://Assets/objects/shield.png" id="1_0r74p"]
+[ext_resource type="Script" path="res://Scripts/shield.gd" id="1_4dxmc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jh3jt"]
+radius = 21.0
+
+[node name="Shield" type="Area2D" groups=["Sword"]]
+script = ExtResource("1_4dxmc")
+damage = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 8)
+texture = ExtResource("1_0r74p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+shape = SubResource("CircleShape2D_jh3jt")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

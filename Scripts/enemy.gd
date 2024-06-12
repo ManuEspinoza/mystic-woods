@@ -16,8 +16,10 @@ enum {
 	KNOCKBACK,
 	DEAD
 }
-const PROBABILITY = 5
-var healer_item := preload("res://Scenes/healer.tscn")
+const HEART_PROBABILITY = 7
+const SHIELD_PROBABILITY = 10
+const healer_item := preload("res://Scenes/healer.tscn")
+const shield_item := preload("res://Scenes/droppable_shield.tscn")
 var target_position
 var damage = 10
 var state = WALK
@@ -107,10 +109,20 @@ func set_animtion_tree_condition(condition):
 	animation_tree[condition] = true
 	
 func drop_item():
-	if (randi() % PROBABILITY) == (PROBABILITY - 1): 
-		var healer = healer_item.instantiate()
-		healer.position = position
-		game.call_deferred("add_child", healer)
+	var dropped = get_probability(HEART_PROBABILITY, healer_item)
+	if not dropped:
+		get_probability(SHIELD_PROBABILITY, shield_item)
+	
+		
+func get_probability(PROBABILITY, dropable_item):
+	randomize()
+	if(randi() % PROBABILITY) == (PROBABILITY - 1):
+		var dropable = dropable_item.instantiate()
+		dropable.position = position
+		game.call_deferred("add_child", dropable)
+		return true
+	
+	return false
 
 func find_path():
 	navigation_agent.target_position = player.global_position

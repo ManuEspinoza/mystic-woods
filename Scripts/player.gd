@@ -19,6 +19,7 @@ const DOWN = "down"
 
 const FLICKERS_TIME = 0.2
 const MAX_HEALTH = 100
+const INVENCIBILITY_TIME = 1
 
 enum {
 	WALK,
@@ -50,8 +51,8 @@ func _on_body_area_body_entered(body):
 	handle_enemy_damage()
 		
 func _on_body_area_area_entered(area):
-	if area.is_in_group("Healer"):
-		handle_health_up(area)
+	if area.is_in_group("Droppable"):
+		handle_droppable(area)
 	elif area.is_in_group("Attack"):
 		handle_attack_damage(area)
 
@@ -78,7 +79,7 @@ func handle_damage_dealed(damage):
 		
 	if final_health < MAX_HEALTH:
 		heathbar.visible = true
-	damage_timer.start()
+	damage_timer.start(INVENCIBILITY_TIME)
 	flick_sprite()
 	
 func flick_sprite():
@@ -87,18 +88,9 @@ func flick_sprite():
 	await get_tree().create_timer(FLICKERS_TIME).timeout
 	sprite.modulate = Color.WHITE
 
-func handle_health_up(healer):
-	if health < MAX_HEALTH:
-		var health_difference = abs(MAX_HEALTH - health)
-		if health_difference < healer.HEALTH_UP:
-			health += health_difference 
-		else:
-			health += healer.HEALTH_UP
-	
-	heathbar.value = health
-	
-	if health == MAX_HEALTH:
-		heathbar.visible = false
+func handle_droppable(droppable):
+	if droppable.effect:
+		droppable.effect(self)
 
 func move_state(delta):
 	input_direction = Input.get_vector(LEFT, RIGHT, UP, DOWN)
@@ -131,3 +123,9 @@ func attack_state():
 func set_walk():
 	animation_tree["parameters/conditions/is_attacking"] = false
 	state = WALK
+
+func _on_heathbar_value_changed(value):
+	if value == heathbar.max_value:
+		heathbar.visible = false
+	else:
+		heathbar.visible = true

@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://blqlbo1sxrct"]
 
 [ext_resource type="Script" path="res://Scripts/spell.gd" id="1_0tr7r"]
-[ext_resource type="Script" path="res://Scripts/sword.gd" id="3_30yli"]
+[ext_resource type="Script" path="res://Scripts/damager.gd" id="3_30yli"]
 [ext_resource type="Texture2D" uid="uid://bc4hu8f3kaqwn" path="res://Assets/objects/Thunder projectile1 wo blur.png" id="3_xkkna"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jweal"]

@@ -1,8 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://dy5ud8f1u735x"]
+[gd_scene load_steps=17 format=3 uid="uid://deljr2lcswxnl"]
 
-[ext_resource type="Script" path="res://Scripts/healer.gd" id="1_2662f"]
+[ext_resource type="Script" path="res://Scripts/healer.gd" id="1_ojefm"]
 [ext_resource type="Texture2D" uid="uid://c1pg1umpi7u4r" path="res://Assets/objects/heart.png" id="2_ewa6l"]
-[ext_resource type="AudioStream" uid="uid://sovir5e0w2lh" path="res://Assets/audio/Heart.wav" id="3_lwdbv"]
+[ext_resource type="AudioStream" uid="uid://vokr081y460x" path="res://Assets/audio/heal-up.mp3" id="3_sk4sd"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s6ysf"]
 radius = 8.0
@@ -72,8 +72,48 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="Animation" id="Animation_t4des"]
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PickupSound:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="Animation" id="Animation_7dask"]
 resource_name = "pickup"
+length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -117,51 +157,12 @@ tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.6),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"queue_free"
 }]
-}
-
-[sub_resource type="Animation" id="Animation_t4des"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PickupSound:playing")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mu58p"]
@@ -170,8 +171,9 @@ _data = {
 "pickup": SubResource("Animation_7dask")
 }
 
-[node name="Healer" type="Area2D" groups=["Healer"]]
-script = ExtResource("1_2662f")
+[node name="Healer" type="Area2D" node_paths=PackedStringArray("animation_player") groups=["Droppable"]]
+script = ExtResource("1_ojefm")
+animation_player = NodePath("AnimationPlayer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_s6ysf")
@@ -187,7 +189,7 @@ libraries = {
 }
 
 [node name="PickupSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_lwdbv")
+stream = ExtResource("3_sk4sd")
 bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
