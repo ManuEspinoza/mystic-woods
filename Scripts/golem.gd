@@ -1,19 +1,19 @@
-class_name Enemy extends CharacterBody2D
+class_name Golem extends CharacterBody2D
+
 @export var animation_tree: AnimationTree
+@export var animation_player: AnimationPlayer
 @export var health_component: HealthComponent
 @export var body: CollisionShape2D
 @export var body_damage: int = 0
 @export var attack_range: AttackRangeComponent
-@export var navigation_agent: NavigationAgent2D
-@export var navigation_timer: Timer
 
 @onready var player = get_node("/root/Game/Player")
 @onready var game = get_node("/root/Game")
 
 enum {
+	IDLE,
 	WALK,
 	ATTACK,
-	KNOCKBACK,
 	DEAD
 }
 const HEART_PROBABILITY = 7
@@ -34,8 +34,8 @@ func _physics_process(delta):
 	match state:
 		WALK:
 			move_state()
-		KNOCKBACK:
-			knockback_state()
+		IDLE:
+			pass
 		ATTACK:
 			attack_state()
 		DEAD:
@@ -63,7 +63,7 @@ func blend_position(facing_direction):
 		return 
 	animation_tree["parameters/attack/blend_position"] = facing_direction
 	animation_tree["parameters/walk/blend_position"] = facing_direction
-	animation_tree["parameters/knockback/blend_position"] = facing_direction	
+	animation_tree["parameters/idle/blend_position"] = facing_direction	
 	
 func dead_state():
 	is_dead = true
@@ -75,16 +75,10 @@ func move_state():
 	body.disabled = false
 	if not animation_tree["parameters/conditions/is_walking"]:
 		set_animtion_tree_condition("parameters/conditions/is_walking")
-	var dir = to_local(navigation_agent.get_next_path_position()).normalized()
-	velocity = dir * 100
+	var dir = position.direction_to(player.position)
+	velocity = dir * 50
 	move_and_slide()
 	
-func knockback_state():
-	body.disabled = false
-	if not animation_tree["parameters/conditions/is_hit"]:
-		set_animtion_tree_condition("parameters/conditions/is_hit")
-	target_position = (global_position - player.global_position).normalized()
-	move_and_collide(target_position * 2)
 	
 func attack_state():
 	body.disabled = false
@@ -94,10 +88,6 @@ func attack_state():
 func _on_health_component_health_depleted():
 	state = DEAD
 
-func _on_hurtbox_component_getting_hit():
-	if health_component.current_health > 0:
-		state = KNOCKBACK
-
 func _on_animation_tree_animation_finished(anim_name):
 	if anim_name != "dead":
 		state = WALK
@@ -106,31 +96,16 @@ func _on_animation_tree_animation_finished(anim_name):
 		queue_free()
 
 func set_animtion_tree_condition(condition):
-	animation_tree["parameters/conditions/is_hit"] = false
+	animation_tree["parameters/conditions/is_idle"] = false
 	animation_tree["parameters/conditions/is_attacking"] = false
 	animation_tree["parameters/conditions/is_walking"] = false
 	animation_tree["parameters/conditions/is_dead"] = false
 	animation_tree[condition] = true
 	
 func drop_item():
-	var dropped = get_probability(HEART_PROBABILITY, healer_item)
-	if not dropped:
-		get_probability(SHIELD_PROBABILITY, shield_item)
+	var dropable = healer_item.instantiate()
+	dropable.position = position
+	game.call_deferred("add_child", dropable)
 	
-		
-func get_probability(PROBABILITY, dropable_item):
-	randomize()
-	if(randi() % PROBABILITY) == (PROBABILITY - 1):
-		var dropable = dropable_item.instantiate()
-		dropable.position = position
-		game.call_deferred("add_child", dropable)
-		return true
-	
-	return false
-
-func find_path():
-	navigation_agent.target_position = player.global_position
- 
-func _on_navigation_timer_timeout():
-	find_path()
-	
+func _on_hurtbox_component_getting_hit():
+	animation_player.play("hit")

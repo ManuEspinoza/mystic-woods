@@ -331,7 +331,7 @@ shape = SubResource("RectangleShape2D_01njf")
 texture = ExtResource("5_equf0")
 hframes = 21
 vframes = 10
-frame = 167
+frame = 162
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 5)
