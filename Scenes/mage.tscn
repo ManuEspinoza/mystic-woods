@@ -10,11 +10,11 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_1vycg"]
 radius = 86.7006
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_01njf"]
-size = Vector2(20, 23)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rvbko"]
+height = 25.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_suobg"]
-size = Vector2(20, 23)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_31tkk"]
+height = 25.0
 
 [sub_resource type="Animation" id="Animation_p35g1"]
 length = 0.001
@@ -336,11 +336,11 @@ health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 position = Vector2(0, 3.5)
-shape = SubResource("RectangleShape2D_01njf")
+shape = SubResource("CapsuleShape2D_rvbko")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3.5)
-shape = SubResource("RectangleShape2D_suobg")
+shape = SubResource("CapsuleShape2D_31tkk")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
