@@ -528,7 +528,7 @@ position = Vector2(-426, 147)
 position = Vector2(-327, -305)
 
 [node name="Golem" parent="." instance=ExtResource("10_ce6gn")]
-position = Vector2(162, 98)
+position = Vector2(82, 78)
 
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
 [connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]

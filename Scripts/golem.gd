@@ -45,8 +45,8 @@ func is_player_in_range():
 	if attack_range == null || animation_tree["parameters/conditions/is_attacking"]:
 		return
 	var bodies = attack_range.get_overlapping_bodies()
-	for body in bodies:
-		if body is Player:
+	for overlapping_body in bodies:
+		if overlapping_body is Player:
 			state = ATTACK
 
 func get_facing_direction():
