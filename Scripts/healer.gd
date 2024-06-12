@@ -10,4 +10,4 @@ func effect(body: Player):
 		else:
 			body.health += HEALTH_UP
 	
-	body.heathbar.value = body.health
+	body.health_bar.value = body.health

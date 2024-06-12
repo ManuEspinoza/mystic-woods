@@ -2,7 +2,7 @@ class_name Player extends CharacterBody2D
 
 signal health_depleted
 
-@onready var heathbar = $heathbar
+@onready var health_bar = $health_bar
 @onready var animation_tree = $AnimationTree
 @onready var body_area = $BodyArea
 @onready var damage_timer = $"Damage Timer"
@@ -34,8 +34,8 @@ var health = 100
 
 func _ready():
 	input_direction = Vector2(0, 1)
-	heathbar.visible = false
-	heathbar.value = health
+	health_bar.visible = false
+	health_bar.value = health
 	update_blend_directions()
 	animation_tree["parameters/attack/blend_position"] = input_direction
 	
@@ -69,7 +69,7 @@ func handle_damage_dealed(damage):
 		return
 	var final_health = health
 	final_health -= damage;
-	heathbar.value = final_health
+	health_bar.value = final_health
 	health = final_health
 	
 	if final_health <= 0:
@@ -78,7 +78,7 @@ func handle_damage_dealed(damage):
 		health_depleted.emit()
 		
 	if final_health < MAX_HEALTH:
-		heathbar.visible = true
+		health_bar.visible = true
 	damage_timer.start(INVENCIBILITY_TIME)
 	flick_sprite()
 	
@@ -124,8 +124,8 @@ func set_walk():
 	animation_tree["parameters/conditions/is_attacking"] = false
 	state = WALK
 
-func _on_heathbar_value_changed(value):
-	if value == heathbar.max_value:
-		heathbar.visible = false
+func _on_health_bar_value_changed(value):
+	if value == health_bar.max_value:
+		health_bar.visible = false
 	else:
-		heathbar.visible = true
+		health_bar.visible = true
