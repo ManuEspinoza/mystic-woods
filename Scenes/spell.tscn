@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/spell.gd" id="1_0tr7r"]
 [ext_resource type="Script" path="res://Scripts/damager.gd" id="3_30yli"]
-[ext_resource type="Texture2D" uid="uid://bc4hu8f3kaqwn" path="res://Assets/objects/Thunder projectile1 wo blur.png" id="3_xkkna"]
+[ext_resource type="Texture2D" uid="uid://gjol3q4isyop" path="res://Assets/objects/projectile.png" id="3_lxgg3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jweal"]
 radius = 4.0
@@ -12,47 +12,47 @@ height = 24.0
 radius = 4.0
 height = 24.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ige7w"]
-atlas = ExtResource("3_xkkna")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_7s5d5"]
+atlas = ExtResource("3_lxgg3")
+region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ro1h8"]
-atlas = ExtResource("3_xkkna")
-region = Rect2(32, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ydtt"]
+atlas = ExtResource("3_lxgg3")
+region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sq66d"]
-atlas = ExtResource("3_xkkna")
-region = Rect2(64, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_x334y"]
+atlas = ExtResource("3_lxgg3")
+region = Rect2(128, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0mced"]
-atlas = ExtResource("3_xkkna")
-region = Rect2(96, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_uiy0s"]
+atlas = ExtResource("3_lxgg3")
+region = Rect2(192, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_27clv"]
-atlas = ExtResource("3_xkkna")
-region = Rect2(128, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_br1vx"]
+atlas = ExtResource("3_lxgg3")
+region = Rect2(256, 0, 64, 64)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_lvnm2"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_f2b24"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ige7w")
+"texture": SubResource("AtlasTexture_7s5d5")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ro1h8")
+"texture": SubResource("AtlasTexture_4ydtt")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_sq66d")
+"texture": SubResource("AtlasTexture_x334y")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0mced")
+"texture": SubResource("AtlasTexture_uiy0s")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_27clv")
+"texture": SubResource("AtlasTexture_br1vx")
 }],
 "loop": true,
 "name": &"default",
-"speed": 10.0
+"speed": 12.0
 }]
 
 [node name="Spell" type="Node2D"]
@@ -75,9 +75,8 @@ shape = SubResource("CapsuleShape2D_o4rqy")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
-sprite_frames = SubResource("SpriteFrames_lvnm2")
+sprite_frames = SubResource("SpriteFrames_f2b24")
 autoplay = "default"
-frame = 2
-frame_progress = 0.356048
+frame_progress = 0.887418
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
