@@ -25,13 +25,13 @@ var target_position
 var state = IDLE
 var is_dead = false
 var inicial_position = Vector2.ZERO
-var movement_range = 50
+var run_position = 35
 
 func _ready():
 	if position.x > 0:
-		position.x = position.x - 35
+		position.x = position.x - run_position
 	else:
-		position.x = position.x + 35
+		position.x = position.x + run_position
 		
 	inicial_position = position
 	
@@ -54,8 +54,7 @@ func _physics_process(delta):
 func is_player_in_range():
 	if attack_range == null || animation_tree["parameters/conditions/is_attacking"]:
 		return
-	if not action_in_range(attack_range, ATTACK):
-		action_in_range(chase_range, WALK)
+	action_in_range(attack_range, ATTACK)
 
 func action_in_range(range, action):
 	var bodies = range.get_overlapping_bodies()
@@ -91,33 +90,32 @@ func move_state():
 	body.disabled = false
 	if not animation_tree["parameters/conditions/is_walking"]:
 		set_animtion_tree_condition("parameters/conditions/is_walking")
-	if out_of_movement_range():
+	if not action_in_range(chase_range, WALK):
 		go_to_inicial_position()
 	else:
 		go_torward_player()
-		
+
 func go_torward_player():
 	var dir = position.direction_to(player.position)
 	velocity = dir * SPEED
 	move_and_slide()
 	
 func go_to_inicial_position():
+	var distance = position - inicial_position
+	if distance.length() <= 2:
+		state = IDLE
 	var dir = position.direction_to(inicial_position)
 	velocity = dir * SPEED
 	move_and_slide()
-	state = IDLE
 	
-func out_of_movement_range():
-	var distance = inicial_position - position
-	
-	if distance.length() >= movement_range:
-		return true
-	return false
-
 func idle_state():
 	body.disabled = false
 	if not animation_tree["parameters/conditions/is_idle"]:
 		set_animtion_tree_condition("parameters/conditions/is_idle")
+	velocity = Vector2.ZERO
+	move_and_slide()
+	if action_in_range(chase_range, WALK):
+		state = WALK
 	
 func attack_state():
 	body.disabled = false
