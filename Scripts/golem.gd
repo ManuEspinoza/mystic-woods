@@ -18,7 +18,7 @@ enum {
 }
 const HEART_PROBABILITY = 7
 const SHIELD_PROBABILITY = 10
-const SPEED = 50
+const SPEED = 75
 const healer_item := preload("res://Scenes/healer.tscn")
 const shield_item := preload("res://Scenes/droppable_shield.tscn")
 var target_position
@@ -64,6 +64,7 @@ func action_in_range(range, action):
 			state = action
 			return true
 	return false
+
 func get_facing_direction():
 	var direction_to = position.direction_to(player.position)
 	var facing_direction = Vector2.ZERO
@@ -107,9 +108,9 @@ func go_to_inicial_position():
 	state = IDLE
 	
 func out_of_movement_range():
-	var esto = inicial_position - position
+	var distance = inicial_position - position
 	
-	if esto.length() >= movement_range:
+	if distance.length() >= movement_range:
 		return true
 	return false
 

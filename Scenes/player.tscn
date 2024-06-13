@@ -500,7 +500,7 @@ size = Vector2(11, 20)
 size = Vector2(11, 20)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
-collision_mask = 3
+collision_mask = 7
 script = ExtResource("1_0qppv")
 
 [node name="BodyArea" type="Area2D" parent="."]
@@ -524,7 +524,7 @@ libraries = {
 texture = ExtResource("1_3wi3f")
 hframes = 6
 vframes = 13
-frame = 12
+frame = 14
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../CollisionShape2D")
