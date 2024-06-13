@@ -32,16 +32,14 @@ func _on_spawner_all_portals_destroyed():
 		game_over(true)
 
 func _on_child_exiting_tree(node):
-	if node is Enemy:
-		discount_enemies()
-func _on_child_entered_tree(node):
-	if node is Enemy:
-		enemy_count += 1
-
-func discount_enemies():
-	enemy_count -= 1
+	if node is Enemy or node is Golem:
+		enemy_count -= 1
 	if enemy_count <= 0 && all_portals_destroyed:
 		game_over(true)
+		
+func _on_child_entered_tree(node):
+	if node is Enemy  or node is Golem:
+		enemy_count += 1
 
 func game_over(win):
 	var game_over_screen := GAME_OVER_SCREEN.instantiate()

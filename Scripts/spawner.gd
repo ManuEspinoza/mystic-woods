@@ -2,6 +2,7 @@ extends Node2D
 const slime_scene := preload("res://Scenes/slime.tscn")
 const mage_scene := preload("res://Scenes/mage.tscn")
 const warior_scene := preload("res://Scenes/warior.tscn")
+const golem_scene = preload("res://Scenes/golem.tscn")
 const PORTAL = preload("res://Scenes/portal.tscn")
 signal all_portals_destroyed
 @onready var timer = $Timer
@@ -10,11 +11,13 @@ signal all_portals_destroyed
 @onready var bot_right_limit = get_parent().bot_right
 var acceptale_distance = 100
 var portals := []
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	#inovoike_portals()
 	populate_portals()
+	spawn_golems()
 	timer.start()
+	
 func _on_timer_timeout():
 	spawn()
 
@@ -28,7 +31,15 @@ func populate_portals():
 			portals.append(i)
 	if portals.size() <= 0:
 		all_portals_destroyed.emit()
-		
+
+func spawn_golems():
+	if !portals.size():
+		return
+	for portal in portals:
+		var golem = golem_scene.instantiate()
+		golem.position = portal.position
+		game.call_deferred("add_child", golem)
+
 func spawn():
 	#pick random spawner
 	randomize()

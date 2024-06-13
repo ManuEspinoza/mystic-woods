@@ -6,7 +6,7 @@ class_name Golem extends CharacterBody2D
 @export var body: CollisionShape2D
 @export var body_damage: int = 0
 @export var attack_range: AttackRangeComponent
-
+@export var chase_range: AttackRangeComponent
 @onready var player = get_node("/root/Game/Player")
 @onready var game = get_node("/root/Game")
 
@@ -18,12 +18,22 @@ enum {
 }
 const HEART_PROBABILITY = 7
 const SHIELD_PROBABILITY = 10
+const SPEED = 50
 const healer_item := preload("res://Scenes/healer.tscn")
 const shield_item := preload("res://Scenes/droppable_shield.tscn")
 var target_position
-var damage = 10
-var state = WALK
+var state = IDLE
 var is_dead = false
+var inicial_position = Vector2.ZERO
+var movement_range = 50
+
+func _ready():
+	if position.x > 0:
+		position.x = position.x - 35
+	else:
+		position.x = position.x + 35
+		
+	inicial_position = position
 	
 func _physics_process(delta):
 	if is_dead == true:
@@ -35,7 +45,7 @@ func _physics_process(delta):
 		WALK:
 			move_state()
 		IDLE:
-			pass
+			idle_state()
 		ATTACK:
 			attack_state()
 		DEAD:
@@ -44,11 +54,16 @@ func _physics_process(delta):
 func is_player_in_range():
 	if attack_range == null || animation_tree["parameters/conditions/is_attacking"]:
 		return
-	var bodies = attack_range.get_overlapping_bodies()
+	if not action_in_range(attack_range, ATTACK):
+		action_in_range(chase_range, WALK)
+
+func action_in_range(range, action):
+	var bodies = range.get_overlapping_bodies()
 	for overlapping_body in bodies:
 		if overlapping_body is Player:
-			state = ATTACK
-
+			state = action
+			return true
+	return false
 func get_facing_direction():
 	var direction_to = position.direction_to(player.position)
 	var facing_direction = Vector2.ZERO
@@ -75,10 +90,33 @@ func move_state():
 	body.disabled = false
 	if not animation_tree["parameters/conditions/is_walking"]:
 		set_animtion_tree_condition("parameters/conditions/is_walking")
+	if out_of_movement_range():
+		go_to_inicial_position()
+	else:
+		go_torward_player()
+		
+func go_torward_player():
 	var dir = position.direction_to(player.position)
-	velocity = dir * 50
+	velocity = dir * SPEED
 	move_and_slide()
 	
+func go_to_inicial_position():
+	var dir = position.direction_to(inicial_position)
+	velocity = dir * SPEED
+	move_and_slide()
+	state = IDLE
+	
+func out_of_movement_range():
+	var esto = inicial_position - position
+	
+	if esto.length() >= movement_range:
+		return true
+	return false
+
+func idle_state():
+	body.disabled = false
+	if not animation_tree["parameters/conditions/is_idle"]:
+		set_animtion_tree_condition("parameters/conditions/is_idle")
 	
 func attack_state():
 	body.disabled = false
@@ -108,4 +146,5 @@ func drop_item():
 	game.call_deferred("add_child", dropable)
 	
 func _on_hurtbox_component_getting_hit():
-	animation_player.play("hit")
+	if not is_dead:
+		animation_player.play("hit")
