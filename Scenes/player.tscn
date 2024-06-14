@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://7audpf70ehds"]
+[gd_scene load_steps=59 format=3 uid="uid://7audpf70ehds"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_0qppv"]
 [ext_resource type="Texture2D" uid="uid://dfmw83pgthvml" path="res://Assets/characters/player.png" id="1_3wi3f"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/damager.gd" id="3_exjtv"]
 [ext_resource type="AudioStream" uid="uid://bis50o56xkxqt" path="res://Assets/audio/Hit.mp3" id="4_klvxl"]
 [ext_resource type="Texture2D" uid="uid://ci3blgctwkjj6" path="res://Assets/objects/20-inifinity.png" id="4_uvht3"]
+[ext_resource type="PackedScene" uid="uid://rdhott0cllgx" path="res://Scenes/final_attack.tscn" id="5_scwta"]
 [ext_resource type="Texture2D" uid="uid://bysxsmp8xk0ah" path="res://Assets/objects/20-0.png" id="5_w65un"]
 [ext_resource type="Texture2D" uid="uid://bm4454pxsd4cr" path="res://Assets/objects/20-5.png" id="6_nmv8i"]
 
@@ -30,6 +31,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Body:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [42]
 }
 
 [sub_resource type="Animation" id="Animation_i3pyn"]
@@ -400,6 +413,22 @@ tracks/1/keys = {
 "values": [true, true, true]
 }
 
+[sub_resource type="Animation" id="Animation_iuoly"]
+resource_name = "final_attack"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 9, 42, 54, 0, 9, 42, 54]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t0eo8"]
 _data = {
 "RESET": SubResource("Animation_yma2e"),
@@ -408,6 +437,7 @@ _data = {
 "attack_right": SubResource("Animation_c26x1"),
 "attack_up": SubResource("Animation_kk8nw"),
 "death": SubResource("Animation_72gqa"),
+"final_attack": SubResource("Animation_iuoly"),
 "idle": SubResource("Animation_fv2qv"),
 "idle_left": SubResource("Animation_8ky4v"),
 "idle_right": SubResource("Animation_b8eer"),
@@ -560,10 +590,11 @@ size = Vector2(11, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ce4kf"]
 size = Vector2(11, 20)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("steps") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("steps", "final_attack") groups=["Player"]]
 collision_mask = 7
 script = ExtResource("1_0qppv")
 steps = NodePath("Steps")
+final_attack = NodePath("FinalAttack")
 
 [node name="Steps" parent="." instance=ExtResource("2_ydjfu")]
 position = Vector2(0, 17)
@@ -589,10 +620,11 @@ libraries = {
 }
 
 [node name="Body" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
 texture = ExtResource("1_3wi3f")
 hframes = 6
 vframes = 13
-frame = 13
+frame = 42
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../CollisionShape2D")
@@ -639,6 +671,9 @@ script = ExtResource("3_exjtv")
 position = Vector2(-13, 10)
 shape = SubResource("RectangleShape2D_ce4kf")
 disabled = true
+
+[node name="FinalAttack" parent="." instance=ExtResource("5_scwta")]
+position = Vector2(0, 8)
 
 [node name="health_bar" type="TextureProgressBar" parent="."]
 modulate = Color(0.4, 0.572549, 0.239216, 1)

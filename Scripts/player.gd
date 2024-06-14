@@ -1,14 +1,15 @@
 class_name Player extends CharacterBody2D
 
 signal health_depleted
-
+@export var steps: GPUParticles2D
+@export var final_attack: FinalAttack
 @onready var health_bar = $health_bar
 @onready var animation_tree = $AnimationTree
 @onready var body_area = $BodyArea
 @onready var damage_timer = $"Damage Timer"
 @onready var sprite = $Body
 @onready var audio_stream_player_2d = $AudioStreamPlayer2D
-@export var steps: GPUParticles2D
+
 
 const SPEED = 200.0
 
@@ -17,6 +18,7 @@ const LEFT = "left"
 const RIGHT = "right"
 const UP = "up"
 const DOWN = "down"
+const FINAL_ATTACK = "final"
 
 const FLICKERS_TIME = 0.2
 const MAX_HEALTH = 100
@@ -133,3 +135,7 @@ func _on_health_bar_value_changed(value):
 		health_bar.visible = false
 	else:
 		health_bar.visible = true
+		
+func _input(event):
+	if event.is_action_pressed(FINAL_ATTACK):
+		final_attack.execute()
