@@ -8,6 +8,7 @@ signal health_depleted
 @onready var damage_timer = $"Damage Timer"
 @onready var sprite = $Body
 @onready var audio_stream_player_2d = $AudioStreamPlayer2D
+@export var steps: GPUParticles2D
 
 const SPEED = 200.0
 
@@ -91,10 +92,13 @@ func flick_sprite():
 func handle_droppable(droppable):
 	if droppable.effect:
 		droppable.effect(self)
-
+		
+func handle_step_particle():
+	pass
+	
 func move_state(delta):
 	input_direction = Input.get_vector(LEFT, RIGHT, UP, DOWN)
-	
+	steps.process_material.direction = Vector3(input_direction.x, input_direction.y, 0) * -1
 	if input_direction == Vector2.ZERO:
 		set_walk_conditions(false)
 	else:
