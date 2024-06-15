@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://7audpf70ehds"]
+[gd_scene load_steps=64 format=3 uid="uid://7audpf70ehds"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_0qppv"]
 [ext_resource type="Texture2D" uid="uid://dfmw83pgthvml" path="res://Assets/characters/player.png" id="1_3wi3f"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://Scripts/damager.gd" id="3_exjtv"]
 [ext_resource type="AudioStream" uid="uid://bis50o56xkxqt" path="res://Assets/audio/Hit.mp3" id="4_klvxl"]
 [ext_resource type="Texture2D" uid="uid://ci3blgctwkjj6" path="res://Assets/objects/20-inifinity.png" id="4_uvht3"]
-[ext_resource type="PackedScene" uid="uid://rdhott0cllgx" path="res://Scenes/final_attack.tscn" id="5_scwta"]
 [ext_resource type="Texture2D" uid="uid://bysxsmp8xk0ah" path="res://Assets/objects/20-0.png" id="5_w65un"]
 [ext_resource type="Texture2D" uid="uid://bm4454pxsd4cr" path="res://Assets/objects/20-5.png" id="6_nmv8i"]
 
@@ -31,18 +30,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Body:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [42]
 }
 
 [sub_resource type="Animation" id="Animation_i3pyn"]
@@ -415,7 +402,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_iuoly"]
 resource_name = "final_attack"
-length = 2.0
+length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -473,6 +460,14 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_x6ha7"]
 animation = &"death"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dptnq"]
+animation = &"final_attack"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_qak24"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_dptnq")
+blend_point_0/pos = Vector2(0, 0)
+blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pnqk1"]
 animation = &"idle_up"
@@ -564,6 +559,22 @@ advance_condition = &"is_dead"
 advance_mode = 2
 advance_condition = &"is_dead"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q8xlh"]
+advance_mode = 2
+advance_condition = &"is_final_attacking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0ean8"]
+advance_mode = 2
+advance_condition = &"is_final_attacking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2jn4k"]
+advance_mode = 2
+advance_condition = &"is_final_attacking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wmrvy"]
+advance_mode = 2
+advance_condition = &"is_walking"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_cj8h3"]
 states/End/position = Vector2(752.167, 100.307)
 states/Start/position = Vector2(142, 99.8891)
@@ -571,12 +582,14 @@ states/attack/node = SubResource("AnimationNodeBlendSpace2D_ebcj5")
 states/attack/position = Vector2(362, -16)
 states/death/node = SubResource("AnimationNodeAnimation_x6ha7")
 states/death/position = Vector2(361.778, 196.574)
+states/final/node = SubResource("AnimationNodeBlendSpace2D_qak24")
+states/final/position = Vector2(560, -7.07754)
 states/idle/node = SubResource("AnimationNodeBlendSpace2D_4vxa8")
 states/idle/position = Vector2(276, 99.4815)
 states/walk/node = SubResource("AnimationNodeBlendSpace2D_ffpap")
 states/walk/position = Vector2(454.667, 101.21)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_j540o"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_x2e5y"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_t4goa"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_7ed5k"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_1ifnt"), "walk", "attack", SubResource("AnimationNodeStateMachineTransition_ju834"), "attack", "walk", SubResource("AnimationNodeStateMachineTransition_yvgkd"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_ijxq7"), "walk", "death", SubResource("AnimationNodeStateMachineTransition_n8l3b"), "attack", "death", SubResource("AnimationNodeStateMachineTransition_orim0")]
-graph_offset = Vector2(0, -34.5917)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_j540o"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_x2e5y"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_t4goa"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_7ed5k"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_1ifnt"), "walk", "attack", SubResource("AnimationNodeStateMachineTransition_ju834"), "attack", "walk", SubResource("AnimationNodeStateMachineTransition_yvgkd"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_ijxq7"), "walk", "death", SubResource("AnimationNodeStateMachineTransition_n8l3b"), "attack", "death", SubResource("AnimationNodeStateMachineTransition_orim0"), "attack", "final", SubResource("AnimationNodeStateMachineTransition_q8xlh"), "idle", "final", SubResource("AnimationNodeStateMachineTransition_0ean8"), "walk", "final", SubResource("AnimationNodeStateMachineTransition_2jn4k"), "final", "walk", SubResource("AnimationNodeStateMachineTransition_wmrvy")]
+graph_offset = Vector2(0, -60.4109)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yms3f"]
 size = Vector2(20, 12)
@@ -590,11 +603,12 @@ size = Vector2(11, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ce4kf"]
 size = Vector2(11, 20)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("steps", "final_attack") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("steps", "final_attack_cooldown_timer") groups=["Player"]]
 collision_mask = 7
 script = ExtResource("1_0qppv")
 steps = NodePath("Steps")
-final_attack = NodePath("FinalAttack")
+final_attack_cooldown_timer = NodePath("FinalAttackTimer")
+cooldown = 3
 
 [node name="Steps" parent="." instance=ExtResource("2_ydjfu")]
 position = Vector2(0, 17)
@@ -624,7 +638,7 @@ position = Vector2(0, -1)
 texture = ExtResource("1_3wi3f")
 hframes = 6
 vframes = 13
-frame = 42
+frame = 13
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../CollisionShape2D")
@@ -633,8 +647,10 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/idle = false
 parameters/conditions/is_attacking = false
 parameters/conditions/is_dead = false
+parameters/conditions/is_final_attacking = false
 parameters/conditions/is_walking = false
 parameters/attack/blend_position = Vector2(0.00128043, 0.3)
+parameters/final/blend_position = Vector2(-0.0307298, 0.457143)
 parameters/idle/blend_position = Vector2(0, 0)
 parameters/walk/blend_position = Vector2(0, 0)
 
@@ -672,9 +688,6 @@ position = Vector2(-13, 10)
 shape = SubResource("RectangleShape2D_ce4kf")
 disabled = true
 
-[node name="FinalAttack" parent="." instance=ExtResource("5_scwta")]
-position = Vector2(0, 8)
-
 [node name="health_bar" type="TextureProgressBar" parent="."]
 modulate = Color(0.4, 0.572549, 0.239216, 1)
 offset_left = -9.0
@@ -696,6 +709,10 @@ stream = ExtResource("4_klvxl")
 volume_db = 24.0
 bus = &"SFX"
 
+[node name="FinalAttackTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="area_entered" from="BodyArea" to="." method="_on_body_area_area_entered"]
 [connection signal="body_entered" from="BodyArea" to="." method="_on_body_area_body_entered"]
+[connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
 [connection signal="value_changed" from="health_bar" to="." method="_on_health_bar_value_changed"]

@@ -19,7 +19,7 @@ linear_accel_max = 1.0
 attractor_interaction_enabled = false
 scale_min = 0.0
 scale_max = 50.0
-color = Color(0.612832, 0.442492, 0.272579, 1)
+color = Color(0.720127, 0.531429, 0.345053, 1)
 anim_offset_min = 1.0
 anim_offset_max = 1.0
 turbulence_enabled = true
@@ -34,9 +34,9 @@ turbulence_initial_displacement_max = 100.0
 
 [node name="HittingGround" type="GPUParticles2D"]
 material = SubResource("CanvasItemMaterial_gvw1n")
-scale = Vector2(0.2, 0.2)
+scale = Vector2(0.3, 0.3)
 emitting = false
-amount = 100
+amount = 300
 process_material = SubResource("ParticleProcessMaterial_v4ikj")
 lifetime = 2.0
 one_shot = true

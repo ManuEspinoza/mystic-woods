@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/final_attack.gd" id="1_1felk"]
 [ext_resource type="Script" path="res://Scripts/damager.gd" id="1_w5vxl"]
 [ext_resource type="PackedScene" uid="uid://05fhrnkn0cj3" path="res://Scenes/hitting_ground.tscn" id="2_38q4d"]
+[ext_resource type="PackedScene" uid="uid://cebpjwo84321f" path="res://Scenes/cracks.tscn" id="4_2lrna"]
 [ext_resource type="AudioStream" uid="uid://ilpi3tphktbv" path="res://Assets/audio/final_attack.mp3" id="4_ct30a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5xxcb"]
@@ -18,8 +19,8 @@ radius = 57.0
 radius = 70.0071
 
 [sub_resource type="Animation" id="Animation_c6n8h"]
-resource_name = "attack"
-length = 2.0
+resource_name = "RESET"
+length = 2.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -35,7 +36,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Area2D2/CollisionShape2D:disabled")
+tracks/1/path = NodePath("Area2D2/CollisionShape2D2:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -47,7 +48,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Area2D3/CollisionShape2D:disabled")
+tracks/2/path = NodePath("Area2D3/CollisionShape2D3:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -59,7 +60,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Area2D4/CollisionShape2D:disabled")
+tracks/3/path = NodePath("Area2D4/CollisionShape2D4:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -92,86 +93,22 @@ tracks/5/keys = {
 "update": 1,
 "values": [true]
 }
-
-[sub_resource type="Animation" id="Animation_hmsi4"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Area2D/CollisionShape2D:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Cracks:emitting")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Area2D2/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Area2D3/CollisionShape2D:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Area2D4/CollisionShape2D:disabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("HittingGround:emitting")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("AudioStreamPlayer2D:playing")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"values": [true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rhccs"]
 _data = {
-"RESET": SubResource("Animation_hmsi4"),
-"attack": SubResource("Animation_c6n8h")
+"RESET": SubResource("Animation_c6n8h")
 }
 
 [node name="FinalAttack" type="Node2D" node_paths=PackedStringArray("animation_player")]
@@ -183,13 +120,12 @@ script = ExtResource("1_w5vxl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_5xxcb")
-disabled = true
 
 [node name="Area2D2" type="Area2D" parent="." groups=["Sword"]]
 script = ExtResource("1_w5vxl")
 damage = 5
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D2"]
 shape = SubResource("CircleShape2D_rttes")
 disabled = true
 
@@ -197,7 +133,7 @@ disabled = true
 script = ExtResource("1_w5vxl")
 damage = 5
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D3"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D3"]
 shape = SubResource("CircleShape2D_yvo7g")
 disabled = true
 
@@ -205,11 +141,15 @@ disabled = true
 script = ExtResource("1_w5vxl")
 damage = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D4"]
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Area2D4"]
 shape = SubResource("CircleShape2D_dlglu")
 disabled = true
 
 [node name="HittingGround" parent="." instance=ExtResource("2_38q4d")]
+emitting = true
+
+[node name="Cracks" parent="." instance=ExtResource("4_2lrna")]
+emitting = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -219,3 +159,5 @@ libraries = {
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_ct30a")
 bus = &"SFX"
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
