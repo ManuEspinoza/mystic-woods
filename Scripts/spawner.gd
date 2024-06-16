@@ -11,7 +11,7 @@ signal all_portals_destroyed
 @onready var bot_right_limit = get_parent().bot_right
 var acceptale_distance = 100
 var portals := []
-
+@export var portals_qty = 6
 func _ready():
 	#inovoike_portals()
 	populate_portals()
@@ -63,7 +63,7 @@ func choose_enemie():
    
 #Portals randomize position
 func inovoike_portals():
-	for n in 4:
+	for n in portals_qty:
 		var random_vector = Vector2.ZERO
 		var recalculate_distance = true
 		while recalculate_distance:

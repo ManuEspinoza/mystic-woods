@@ -18,8 +18,13 @@ position = Vector2(-1550, 770)
 [node name="Portal4" parent="." instance=ExtResource("2_oe6s1")]
 position = Vector2(1590, -740)
 
+[node name="Portal5" parent="." instance=ExtResource("2_oe6s1")]
+position = Vector2(0, -775)
+
+[node name="Portal6" parent="." instance=ExtResource("2_oe6s1")]
+position = Vector2(0, 990)
+
 [node name="Timer" type="Timer" parent="."]
-wait_time = 1.5
 
 [connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
 [connection signal="property_list_changed" from="." to="." method="_on_property_list_changed"]
