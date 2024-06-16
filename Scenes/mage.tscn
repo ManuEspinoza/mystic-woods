@@ -359,6 +359,7 @@ parameters/knockback/blend_position = Vector2(0, 0)
 parameters/walk/blend_position = Vector2(-0.193631, -0.221429)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
 
 [node name="NavigationTimer" type="Timer" parent="."]
 wait_time = 0.1

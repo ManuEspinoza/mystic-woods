@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyeq2gdpvl7om"]
+
+[ext_resource type="Texture2D" uid="uid://5c3yf7qdb24v" path="res://Assets/objects/Charged attack.png" id="1_b01fe"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wcr77"]
+texture = ExtResource("1_b01fe")
+
+[node name="ChargedAttackVisualTimer" type="ProgressBar"]
+offset_right = 34.0
+offset_bottom = 28.0
+theme_override_styles/background = SubResource("StyleBoxTexture_wcr77")
+max_value = 20.0

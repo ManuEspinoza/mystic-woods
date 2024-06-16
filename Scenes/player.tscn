@@ -216,6 +216,22 @@ tracks/0/keys = {
 "values": [54, 55, 56]
 }
 
+[sub_resource type="Animation" id="Animation_iuoly"]
+resource_name = "final_attack"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 9, 42, 54, 0, 9, 42, 54]
+}
+
 [sub_resource type="Animation" id="Animation_fv2qv"]
 resource_name = "idle"
 length = 0.6
@@ -398,22 +414,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, true, true]
-}
-
-[sub_resource type="Animation" id="Animation_iuoly"]
-resource_name = "final_attack"
-length = 0.8
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Body:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 9, 42, 54, 0, 9, 42, 54]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t0eo8"]
@@ -608,7 +608,7 @@ collision_mask = 7
 script = ExtResource("1_0qppv")
 steps = NodePath("Steps")
 final_attack_cooldown_timer = NodePath("FinalAttackTimer")
-cooldown = 3
+cooldown = 5
 
 [node name="Steps" parent="." instance=ExtResource("2_ydjfu")]
 position = Vector2(0, 17)
@@ -638,7 +638,7 @@ position = Vector2(0, -1)
 texture = ExtResource("1_3wi3f")
 hframes = 6
 vframes = 13
-frame = 13
+frame = 15
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../CollisionShape2D")
