@@ -1,13 +1,9 @@
-extends Node2D
-@onready var progress_bar = $ProgressBar
-@onready var label = $Label
-#@export var timer: Timer
+extends ProgressBar
+@export var player: Player
 
-#func _ready():
-	#label.text = timer.time_left
-	#progress_bar.max_value = timer.time_left
-	#progress_bar.value = timer.time_left
+func _ready():
+	max_value = player.final_attack_cooldown_timer.time_left
+	value = player.final_attack_cooldown_timer.time_left
 
-#func _process(delta):
-	#label.text = timer.time_left
-	#progress_bar.value = timer.time_left
+func _process(delta):
+	value = player.final_attack_cooldown_timer.time_left

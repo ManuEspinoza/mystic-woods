@@ -80,10 +80,10 @@ texture = ExtResource("1_72fka")
 region_rect = Rect2(16.4293, 449.732, 20.3211, 28.2237)
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
-offset_left = 435.0
-offset_top = 61.0
-offset_right = 469.0
-offset_bottom = 109.0
+offset_left = 442.0
+offset_top = 69.0
+offset_right = 476.0
+offset_bottom = 117.0
 texture = ExtResource("1_72fka")
 region_rect = Rect2(209, 213, 15, 22)
 

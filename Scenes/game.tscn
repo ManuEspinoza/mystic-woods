@@ -499,17 +499,9 @@ limit_bottom = 445
 position_smoothing_speed = 0.0
 editor_draw_limits = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
-follow_viewport_scale = 548.297
-
-[node name="ChargedAttackVisualTimer" parent="Camera2D/CanvasLayer" instance=ExtResource("5_53bw8")]
-offset_left = -257.0
-offset_top = 115.0
-offset_right = -223.0
-offset_bottom = 143.0
-
 [node name="Player" parent="." instance=ExtResource("6_ibyl7")]
 unique_name_in_owner = true
+cooldown = 20
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
@@ -535,6 +527,20 @@ position = Vector2(-426, 147)
 
 [node name="Healer3" parent="." instance=ExtResource("7_n5yc8")]
 position = Vector2(-327, -305)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ChargedAttackVisualTimer" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("5_53bw8")]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 18.0
+offset_top = -46.0
+offset_right = 52.0
+offset_bottom = -18.0
+grow_vertical = 0
+show_percentage = false
+player = NodePath("../../Player")
 
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
 [connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
